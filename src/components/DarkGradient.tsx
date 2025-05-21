@@ -17,7 +17,7 @@ const DarkGradient = () => {
         "></div> */}
 
         <div className="
-  absolute bg-gradient-to-br from-purple-400 to-transparent opacity-40 [filter:blur(64px)] transform-gpu
+  absolute aspect-square rounded-full bg-gradient-to-br from-purple-400 to-transparent opacity-40 [filter:blur(64px)] transform-gpu
   xl:-top-50 xl:-left-20 xl:w-2/5 xl:h-3/4
   lg:-top-20 lg:-left-20 lg:w-1/2 lg:h-3/4
   md:-top-30 md:-left-40 md:w-2/3
