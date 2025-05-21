@@ -24,7 +24,7 @@ const PurpleGridContainer = () => {
                 {/* <div className="absolute left-[10%] top-[15%] h-1 w-1 bg-red-300 shadow-lg shadow-amber-300/70 -translate-x-[50%] -translate-y-[50%] rotate-45"></div> */}
                 {/* <div className="absolute left-[20%] top-[15%] h-1 w-1 bg-red-300 shadow-lg shadow-amber-300/70 -translate-x-[50%] -translate-y-[50%] rotate-45"></div> */}
                 {/* <div className="absolute left-[10%] top-[20%] h-1 w-1 bg-red-300 shadow-lg shadow-amber-300/70 -translate-x-[50%] -translate-y-[50%] rotate-45"></div> */}
-               <div className="absolute left-[20%] top-[20%] h-1 w-1 bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)] -translate-x-[50%] -translate-y-[50%] rotate-45"></div>
+                <div className="absolute left-[20%] top-[20%] h-1 w-1 bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)] -translate-x-[50%] -translate-y-[50%] rotate-45"></div>
 
 
                 {/* Intersection stars - Top right */}
@@ -72,9 +72,11 @@ const PurpleGridContainer = () => {
                 {/* <p className="pt-10 text-purple-400 drop-shadow-[0_0_4px_rgba(192,132,252,0.8)] max-w-md text-center px-8 font-semibold text-xl">
                     Prioritize What Matters – Streamline Your Workflow and Focus on What Drives Success!
                 </p> */}
-                <p className="pt-10 text-purple-400 [text-shadow:0_0_8px_rgba(192,132,252,0.8)] transform-gpu max-w-md text-center px-8 font-semibold text-xl">
-  Prioritize What Matters – Streamline Your Workflow and Focus on What Drives Success!
-</p>
+                <p className="pt-10 text-purple-400 [text-shadow:0_0_8px_rgba(192,132,252,0.8)] transform-gpu max-w-md text-center px-8 font-light text-xl md:text-2xl">
+                    Prioritize What Matters – Streamline Your Workflow and Focus on What Drives Success!
+                </p>
+
+                   
 
 
             </div>
