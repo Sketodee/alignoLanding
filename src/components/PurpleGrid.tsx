@@ -69,9 +69,13 @@ const PurpleGridContainer = () => {
                 <h1 className="pt-10 text-8xl md:text-9xl font-medium mb-6 text-pink-200">Aligno</h1>
 
                 {/* Subtitle */}
-                <p className="pt-10 text-purple-400 drop-shadow-[0_0_4px_rgba(192,132,252,0.8)] max-w-md text-center px-8 font-semibold text-xl">
+                {/* <p className="pt-10 text-purple-400 drop-shadow-[0_0_4px_rgba(192,132,252,0.8)] max-w-md text-center px-8 font-semibold text-xl">
                     Prioritize What Matters – Streamline Your Workflow and Focus on What Drives Success!
-                </p>
+                </p> */}
+                <p className="pt-10 text-purple-400 [text-shadow:0_0_8px_rgba(192,132,252,0.8)] transform-gpu max-w-md text-center px-8 font-semibold text-xl">
+  Prioritize What Matters – Streamline Your Workflow and Focus on What Drives Success!
+</p>
+
 
             </div>
         </div>

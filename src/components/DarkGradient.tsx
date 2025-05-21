@@ -28,11 +28,11 @@ const DarkGradient = () => {
         
         {/* Bottom right purple gradient - 40% width */}
         <div className="
-        absolute  bg-gradient-to-tl from-purple-400 to-transparent opacity-40 blur-3xl
+        absolute  bg-gradient-to-tl from-purple-400 to-transparent opacity-40 [filter:blur(64px)] transform-gpu
         xl:-bottom-50 xl:-right-20 xl:w-2/5 xl:h-3/4
         lg:-bottom-20 lg:-right-20 lg:w-1/2 lg:h-3/4
         md:-bottom-30 md:-right-20 md:w-2/3  
-        -bottom-10 -right-20 w-2/3 h-1/2
+        -bottom-10 -right-20 w-2/3 h-1/2 z-0
         "></div>
         
         {/* Navbar Component */}
