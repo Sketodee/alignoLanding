@@ -1,4 +1,5 @@
 import{ useState } from 'react';
+import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 
 const LogoCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -63,11 +64,9 @@ const LogoCarousel = () => {
           {/* Navigation - Previous */}
           <button 
             onClick={handlePrev}
-            className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors z-50"
+            className="p-2 rounded-full text-white transition-colors z-50"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
+            <CgArrowLongLeft /> 
           </button>
 
           {/* Logos container */}
@@ -82,11 +81,9 @@ const LogoCarousel = () => {
           {/* Navigation - Next */}
           <button 
             onClick={handleNext}
-            className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors z-50"
+            className="p-2 rounded-full text-white transition-colors z-50"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
+            <CgArrowLongRight /> 
           </button>
         </div>
       </div>
@@ -97,30 +94,30 @@ const LogoCarousel = () => {
           {/* Navigation - Previous */}
           <button 
             onClick={handlePrev}
-            className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors z-50"
+            className="p-2 rounded-full text-white transition-colors z-50"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
+            <CgArrowLongLeft /> 
           </button>
 
           {/* Logos container */}
-          <div className="flex justify-between items-center space-x-4 w-[70%]">
-            {logos.slice(currentIndex, currentIndex + visibleOnSm).map((logo, index) => (
-              <div key={`sm-logo-${index}`} className="flex items-center justify-center scale-90">
-                {logo}
-              </div>
-            ))}
-          </div>
+     <div className="flex justify-between items-center w-[70%] overflow-hidden">
+  {logos.slice(currentIndex, currentIndex + visibleOnSm).map((logo, index) => (
+    <div
+      key={`sm-logo-${index}`}
+      className="flex items-center justify-center transform scale-50 "
+    >
+      {logo}
+    </div>
+  ))}
+</div>
+
 
           {/* Navigation - Next */}
           <button 
             onClick={handleNext}
-            className="p-2 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors z-50"
+            className="p-2 rounded-full text-white transition-colors z-50"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
+            <CgArrowLongRight /> 
           </button>
         </div>
       </div>
