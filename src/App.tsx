@@ -1,5 +1,6 @@
 import DarkGradient from "./components/DarkGradient"
 import Feature from "./components/Feature"
+import Testimonials from "./components/Testimonials"
 function App() {
 
   return (
@@ -7,6 +8,7 @@ function App() {
     {/* <Navbar /> */}
     <DarkGradient /> 
     <Feature />
+    <Testimonials />
     </>
   )
 }
