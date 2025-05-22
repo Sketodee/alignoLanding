@@ -3,7 +3,7 @@ import UserProgressIndicator from "./ProgressIndicator"
 
 const Feature = () => {
     return (
-        <div className="relative w-full h-[844px] md:h-[744px] lg:h-[780px] xl:h-[800px] bg-black overflow-hidden border-2 border-green-800 ">
+        <div className="relative w-full h-[900px] md:h-[744px] lg:h-[780px] xl:h-[800px] bg-black overflow-hidden ">
             {/* Top left purple gradient */}
             <div className="
                 absolute aspect-square rounded-full bg-gradient-to-bl from-purple-400 to-transparent opacity-40 [filter:blur(64px)] transform-gpu
@@ -27,7 +27,7 @@ const Feature = () => {
             <div className="pt-20 w-[95%] lg:w-[80%] mx-auto md:flex justify-between items-center ">
                 <div className="text-white w-full text-center md:text-left md:w-[60%] lg:w-[60%] ">
                     <p className="text-4xl lg:text-5xl xl:text-7xl w-full xl:w-[90%] "><span className="italic">faster,</span> smarter Project Management</p>
-                    <p className="md:w-[80%] lg:w-[70%] xl:w-[80%] text-center md:text-left py-5 font-extralight text-base lg:text-xl text-gray-400">Our intuitive platform provides everything you need to efficiently manage your projects, from real-time collaboration to detailed task tracking.</p>
+                    <p className="md:w-[80%] lg:w-[70%] xl:w-[80%] text-center md:text-left py-5 font-extralight text-base lg:text-xl text-[#858381]">Our intuitive platform provides everything you need to efficiently manage your projects, from real-time collaboration to detailed task tracking.</p>
                 </div>
                 <div className="text-white w-[95%] md:w-[40%] lg:w-[40%] ">
                     <UserProgressIndicator />
