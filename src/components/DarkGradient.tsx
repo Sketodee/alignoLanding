@@ -28,7 +28,7 @@ const DarkGradient = () => {
   "></div>
 
   {/* Navbar Component */}
-  <Navbar />
+  {/* <Navbar /> */}
 
   {/* Content container */}
   <div className="relative z-10 w-full h-full flex items-center justify-center text-white ">

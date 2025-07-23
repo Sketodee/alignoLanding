@@ -1,14 +1,22 @@
-import DarkGradient from "./components/DarkGradient"
-import Feature from "./components/Feature"
-import Testimonials from "./components/Testimonials"
+import { Route, Routes } from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Home from "./pages/Home"
+import SignIn from "./pages/SignIn"
+import LoginPage from "./pages/LoginPage"
+import Profile from "./pages/Profile"
+
 function App() {
 
   return (
     <>
-    {/* <Navbar /> */}
-    <DarkGradient /> 
-    <Feature />
-    <Testimonials />
+    <Navbar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/profile" element={<Profile />} />
+    </Routes>
+    
     </>
   )
 }
