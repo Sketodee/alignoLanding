@@ -4,14 +4,14 @@ import TestimonialSlides from '../components/TestimonialSlides'
 import WhyChooseUs from '../components/WhyChooseUs'
 import AlignoHelp from '../components/AlignoHelp'
 import Testimonials from '../components/Testimonials'
-import PaymentPlan from '../components/PaymentPlan'
 import HelpSection from '../components/HelpSection'
 import Footer from '../components/Footer'
+import PaymentPlan from '../components/PaymentPlan'
 
 const Home = () => {
   return (
     <>
-      <DarkGradient /> 
+      <DarkGradient />
       <section id="features">
         <Feature />
       </section>

@@ -83,7 +83,7 @@ const Footer: React.FC = () => {
               />
               <button
                 onClick={handleSubscribe}
-                className="w-full bg-gradient-to-r from-orange-400 to-red-400 hover:from-orange-500 hover:to-red-500 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200"
+                className="w-full bg-gradient-to-r from-violet-400 to-purple-400 hover:from-orange-500 hover:to-red-500 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200"
               >
                 Get Notified
               </button>

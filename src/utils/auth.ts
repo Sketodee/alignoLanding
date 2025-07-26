@@ -11,7 +11,7 @@ declare module 'axios' {
 
 // Create Axios instance
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: import.meta.env.VITE_BACKEND_URL,
   withCredentials: true, // needed for sending cookies (refresh token)
   headers: {
     'Content-Type': 'application/json'

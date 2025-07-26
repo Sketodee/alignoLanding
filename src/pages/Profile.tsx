@@ -36,6 +36,10 @@ const Profile = () => {
     navigate('/');
   };
 
+  const handleSubscriptionClick = () => {
+    navigate('/subscription');
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -55,15 +59,15 @@ const Profile = () => {
 
   return (
     <div className="min-h-screen bg-black pt-20">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-4 sm:py-8">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
-          <div className="bg-zinc-900 rounded-xl p-6 mb-6 border border-zinc-700/50">
-            <div className="flex items-center justify-between mb-6">
-              <h1 className="text-3xl font-bold text-white">Profile</h1>
+          <div className="bg-zinc-900 rounded-xl p-4 sm:p-6 mb-6 border border-zinc-700/50">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 space-y-4 sm:space-y-0">
+              <h1 className="text-2xl sm:text-3xl font-bold text-white">Profile</h1>
               <button
                 onClick={() => navigate('/')}
-                className="text-purple-400 hover:text-purple-300 transition-colors"
+                className="text-purple-400 hover:text-purple-300 transition-colors text-sm sm:text-base"
               >
                 ← Back to Home
               </button>
@@ -77,7 +81,7 @@ const Profile = () => {
               <div className="flex-1">
                 {!isEditing ? (
                   <>
-                    <h2 className="text-xl font-semibold text-white mb-1">
+                    <h2 className="text-lg font-semibold text-white mb-1">
                       {user.email || 'User'}
                     </h2>
                     <p className="text-gray-400 mb-3">{user.email}</p>
@@ -125,12 +129,12 @@ const Profile = () => {
           </div>
 
           {/* Account Information */}
-          <div className="bg-zinc-900 rounded-xl p-6 mb-6 border border-zinc-700/50">
-            <h3 className="text-xl font-semibold text-white mb-4">Account Information</h3>
+          <div className="bg-zinc-900 rounded-xl p-4 sm:p-6 mb-6 border border-zinc-700/50">
+            <h3 className="text-lg sm:text-xl font-semibold text-white mb-4">Account Information</h3>
             <div className="space-y-4">
-              <div className="flex justify-between items-center py-3 border-b border-zinc-700">
-                <span className="text-gray-400">Member since</span>
-                <span className="text-white">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-700 space-y-1 sm:space-y-0">
+                <span className="text-gray-400 text-sm sm:text-base">Member since</span>
+                <span className="text-white text-sm sm:text-base">
                   {new Date().toLocaleDateString('en-US', { 
                     year: 'numeric', 
                     month: 'long', 
@@ -138,46 +142,64 @@ const Profile = () => {
                   })}
                 </span>
               </div>
-              <div className="flex justify-between items-center py-3 border-b border-zinc-700">
-                <span className="text-gray-400">Account status</span>
-                <span className="text-green-400 bg-green-400/20 px-2 py-1 rounded-full text-sm">
+              <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-700 space-y-1 sm:space-y-0">
+                <span className="text-gray-400 text-sm sm:text-base">Account status</span>
+                <span className="text-green-400 bg-green-400/20 px-2 py-1 rounded-full text-xs sm:text-sm w-fit">
                   Active
                 </span>
               </div>
-              <div className="flex justify-between items-center py-3">
-                <span className="text-gray-400">Subscription</span>
-                <span className="text-purple-400">Free Plan</span>
+              <div 
+                onClick={handleSubscriptionClick}
+                className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 space-y-1 sm:space-y-0 cursor-pointer hover:bg-zinc-800/50 rounded-md px-2 -mx-2 transition-colors group border border-transparent hover:border-zinc-600"
+              >
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-400 text-sm sm:text-base">Subscription</span>
+                  <span className="text-xs text-purple-400 bg-purple-400/10 px-2 py-0.5 rounded-full sm:hidden">
+                    Tap to manage
+                  </span>
+                </div>
+                <div className="hidden md:block flex items-center space-x-2">
+                  {/* <span className="text-purple-400 text-sm sm:text-base">Free Plan</span> */}
+                  <svg 
+                    className="w-4 h-4 text-purple-400 transform transition-transform group-hover:translate-x-1" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
 
           {/* Settings */}
-          <div className="bg-zinc-900 rounded-xl p-6 mb-6 border border-zinc-700/50">
-            <h3 className="text-xl font-semibold text-white mb-4">Settings</h3>
-            <div className="space-y-3">
-              <button className="w-full text-left px-4 py-3 text-white hover:bg-zinc-800 rounded-md transition-colors">
+          <div className="bg-zinc-900 rounded-xl p-4 sm:p-6 mb-6 border border-zinc-700/50">
+            <h3 className="text-lg sm:text-xl font-semibold text-white mb-4">Settings</h3>
+            <div className="space-y-2 sm:space-y-3">
+              <button className="w-full text-left px-3 sm:px-4 py-3 text-white hover:bg-zinc-800 rounded-md transition-colors text-sm sm:text-base">
                 Change Password
               </button>
-              <button className="w-full text-left px-4 py-3 text-white hover:bg-zinc-800 rounded-md transition-colors">
+              <button className="w-full text-left px-3 sm:px-4 py-3 text-white hover:bg-zinc-800 rounded-md transition-colors text-sm sm:text-base">
                 Privacy Settings
               </button>
-              <button className="w-full text-left px-4 py-3 text-white hover:bg-zinc-800 rounded-md transition-colors">
+              <button className="w-full text-left px-3 sm:px-4 py-3 text-white hover:bg-zinc-800 rounded-md transition-colors text-sm sm:text-base">
                 Notification Preferences
               </button>
             </div>
           </div>
 
           {/* Danger Zone */}
-          <div className="bg-red-950/50 rounded-xl p-6 border border-red-800/50">
-            <h3 className="text-xl font-semibold text-red-400 mb-4">Danger Zone</h3>
-            <div className="space-y-3">
+          <div className="bg-red-950/50 rounded-xl p-4 sm:p-6 border border-red-800/50">
+            <h3 className="text-lg sm:text-xl font-semibold text-red-400 mb-4">Danger Zone</h3>
+            <div className="space-y-2 sm:space-y-3">
               <button
                 onClick={handleLogout}
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-md transition-colors font-medium"
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-md transition-colors font-medium text-sm sm:text-base"
               >
                 Logout
               </button>
-              <button className="w-full bg-red-800 hover:bg-red-900 text-white py-3 rounded-md transition-colors">
+              <button className="w-full bg-red-800 hover:bg-red-900 text-white py-3 rounded-md transition-colors text-sm sm:text-base">
                 Delete Account
               </button>
             </div>

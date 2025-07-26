@@ -97,7 +97,7 @@ const HelpSection: React.FC = () => {
       {/* CTA Section */}
       <div className="relative w-full py-20 px-4 overflow-hidden">
         {/* Background gradient */}
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-t from-orange-400/20 via-red-400/10 to-transparent blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-t from-violet-400/20 via-purple-400/10 to-transparent blur-3xl"></div>
         
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           {/* Top subtitle */}
@@ -116,7 +116,7 @@ const HelpSection: React.FC = () => {
           </p>
 
           {/* CTA Button */}
-          <button className="bg-gradient-to-r from-orange-400 to-red-400 hover:from-orange-500 hover:to-red-500 text-white font-medium px-12 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+          <button className="bg-gradient-to-r from-violet-400 to-purple-400 hover:from-orange-500 hover:to-red-500 text-white font-medium px-12 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
             Get Started
           </button>
         </div>

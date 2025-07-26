@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface PricingPlan {
   id: string;
@@ -7,98 +8,106 @@ interface PricingPlan {
   period: string;
   description: string;
   features: string[];
-  buttonText: string;
-  buttonVariant: 'default' | 'primary';
+  buttonVariant: 'default' | 'primary' | 'premium';
   subText: string;
+  isPopular?: boolean;
 }
 
-const PaymentPlan: React.FC = () => {
-  const [isYearly, setIsYearly] = useState(false);
-
+const Pricing: React.FC = () => {
+  const navigate = useNavigate();
   const plans: PricingPlan[] = [
     {
-      id: 'free',
-      title: 'Free Plan',
-      price: '$0',
+      id: 'single',
+      title: 'Single Plugin Plan',
+      price: '$25',
       period: '/month',
-      description: 'Perfect for individuals just starting out.',
+      description: 'Access to just one (let them pick)',
       features: [
-        'Access to essential project management tools',
-        'Up to 5 active projects',
-        'Basic task tracking features',
-        'Real-time collaboration',
-        'Community support'
+        'Access to one plugin of your choice',
+        'Basic customer support',
+        'Regular updates for selected plugin',
+        'Community forum access',
+        'Cancel anytime'
       ],
-      buttonText: 'Get Template',
       buttonVariant: 'default',
-      subText: 'Free forever'
+      subText: 'Perfect for focused needs'
     },
     {
-      id: 'pro',
-      title: 'Pro Plan',
-      price: '$12',
+      id: 'full',
+      title: 'Full Access Plan',
+      price: '$50',
       period: '/month',
-      description: 'Perfect for individuals and small teams.',
+      description: 'Everything (8-10 Plug-Ins)',
       features: [
-        'Everything in the Free Plan, plus:',
-        'Unlimited projects and tasks',
-        'Advanced analytics and reporting',
-        'Sprint management tools',
+        'Access to all 8-10 plugins',
         'Priority customer support',
-        'Customizable workflows and templates'
+        'Early access to new plugins',
+        'Advanced analytics dashboard',
+        'Custom workflow templates',
+        'API access for integrations'
       ],
-      buttonText: 'Get Template',
       buttonVariant: 'primary',
-      subText: 'Free forever'
+      subText: 'Most popular choice',
+      isPopular: true
+    },
+    {
+      id: 'annual',
+      title: 'Annual Full Access Plan',
+      price: '$350',
+      period: '/year',
+      description: 'Save 42%, includes bonus packs or tutorials',
+      features: [
+        'Everything in Full Access Plan',
+        'Save 42% compared to monthly',
+        'Exclusive bonus plugin packs',
+        'Premium tutorial library',
+        'One-on-one onboarding session',
+        'Custom plugin development consultation'
+      ],
+      buttonVariant: 'premium',
+      subText: 'Best value - Save $250/year'
     }
   ];
 
   const PricingCard: React.FC<{ plan: PricingPlan }> = ({ plan }) => (
-    <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-3xl p-8 h-full flex flex-col">
-      {/* Header with Bill yearly toggle for Pro Plan */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-white text-xl font-medium">{plan.title}</h3>
-          {plan.id === 'pro' && (
-            <div className="flex items-center gap-3">
-              <span className="text-gray-400 text-sm">Bill yearly</span>
-              <button
-                onClick={() => setIsYearly(!isYearly)}
-                className={`relative w-12 h-6 rounded-full transition-colors duration-200 ${
-                  isYearly ? 'bg-orange-400' : 'bg-gray-600'
-                }`}
-              >
-                <div
-                  className={`absolute top-0.5 w-5 h-5 bg-white rounded-full transition-transform duration-200 ${
-                    isYearly ? 'translate-x-6' : 'translate-x-0.5'
-                  }`}
-                />
-              </button>
-            </div>
-          )}
+    <div className={`relative bg-gray-900/60 backdrop-blur-sm border rounded-3xl p-8 h-full flex flex-col ${
+      plan.isPopular ? 'border-purple-400 shadow-lg shadow-purple-400/20' : 'border-gray-700'
+    }`}>
+      {plan.isPopular && (
+        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+          <span className="bg-gradient-to-r from-violet-400 to-purple-400 text-white px-4 py-2 rounded-full text-sm font-medium">
+            Most Popular
+          </span>
         </div>
+      )}
+      
+      <div className="mb-8">
+        <h3 className="text-white text-xl font-medium mb-4">{plan.title}</h3>
         <div className="flex items-baseline gap-1 mb-4">
-          <span className="text-orange-400 text-5xl font-bold">{plan.price}</span>
-          <span className="text-orange-400 text-lg">{plan.period}</span>
+          <span className="text-purple-400 text-5xl font-bold">{plan.price}</span>
+          <span className="text-purple-400 text-lg">{plan.period}</span>
         </div>
         <p className="text-gray-400 text-sm">{plan.description}</p>
       </div>
 
-      {/* Button */}
       <div className="mb-8">
         <button 
+          onClick={() => {
+         navigate('/subscription')
+          }}
           className={`w-full py-4 px-6 rounded-2xl font-medium text-white transition-all duration-200 ${
             plan.buttonVariant === 'primary' 
-              ? 'bg-gradient-to-r from-orange-400 to-red-400 hover:from-orange-500 hover:to-red-500 shadow-lg' 
+              ? 'bg-gradient-to-r from-violet-400 to-purple-400 hover:from-purple-500 hover:to-purple-500 shadow-lg' 
+              : plan.buttonVariant === 'premium'
+              ? 'bg-gradient-to-r from-violet-700 to-purple-900 hover:from-purple-500 hover:to-purple-700 shadow-lg'
               : 'bg-gray-800 hover:bg-gray-700 border border-gray-600'
           }`}
         >
-          {plan.buttonText}
+          Subscribe Now
         </button>
         <p className="text-gray-500 text-sm text-center mt-3">{plan.subText}</p>
       </div>
 
-      {/* Features */}
       <div className="flex-1">
         <ul className="space-y-4">
           {plan.features.map((feature, index) => (
@@ -113,16 +122,20 @@ const PaymentPlan: React.FC = () => {
   );
 
   return (
-    <div className='relative bg-black text-white'>
+    <div className='relative bg-black text-white min-h-screen'>
       <div className="w-[95%] lg:w-[90%] mx-auto py-10 md:pt-28 md:pb-16">
         <div className="text-white text-center">
-          <p className="text-4xl lg:text-5xl xl:text-7xl w-full xl:w-[50%] mx-auto">Choose the <span className="italic">Right Plan</span> for Your Team</p>
-          <p className="py-3 font-extralight text-base line-clamp-4 text-[#858381]">Expand your schema as per your requirements</p>
+          <p className="text-4xl lg:text-5xl xl:text-7xl w-full xl:w-[70%] mx-auto">
+            Choose the <span className="italic">Right Plan</span> for Your Team
+          </p>
+          <p className="py-3 font-extralight text-base text-[#858381]">
+            Expand your schema as per your requirements
+          </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="w-[90%] lg:w-[50%] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+        <div className="w-[95%] lg:w-[90%] xl:w-[80%] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
             {plans.map((plan) => (
               <PricingCard key={plan.id} plan={plan} />
             ))}
@@ -133,4 +146,4 @@ const PaymentPlan: React.FC = () => {
   );
 };
 
-export default PaymentPlan;
+export default Pricing;

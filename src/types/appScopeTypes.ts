@@ -17,3 +17,11 @@ export const AllowedProviders = {
   CUSTOM: 'custom'
 } as const;
 export type AllowedProviders = typeof AllowedProviders[keyof typeof AllowedProviders];
+
+
+export const SubscriptionPlan = {
+  SINGLE: 'single',
+  MONTHLY: 'monthly',
+  YEARLY: 'yearly'
+} as const;
+export type SubscriptionPlan = typeof SubscriptionPlan[keyof typeof SubscriptionPlan];

@@ -21,12 +21,14 @@ const Navbar = () => {
   const handleLogout = () => {
     logout();
     setIsProfileDropdownOpen(false);
+    toggleMenu()
     navigate('/');
   };
 
   const handleProfileClick = () => {
     setIsProfileDropdownOpen(false);
     navigate('/profile');
+    console.log('Navigating to profile');
   };
 
   // Smooth scroll to section
@@ -111,7 +113,7 @@ const Navbar = () => {
               onClick={() => scrollToSection('testimonials')}
               className="text-white hover:text-purple-300 transition-colors cursor-pointer"
             >
-              Testimonials
+              Testimonials  
             </button>
           </div>
 
@@ -235,12 +237,12 @@ const Navbar = () => {
               {!user ? (
                 <>
                   <Link to="/login">
-                    <button className="text-white hover:text-purple-300 transition-colors px-3 py-2 rounded-md hover:bg-white/10 text-left w-full">
+                    <button onClick={toggleMenu} className="text-white hover:text-purple-300 transition-colors px-3 py-2 rounded-md hover:bg-white/10 text-left w-full">
                       Login
                     </button>
                   </Link>
                   <Link to="/signin">
-                    <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md transition-colors font-medium w-full">
+                    <button onClick={toggleMenu} className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md transition-colors font-medium w-full">
                       Sign Up
                     </button>
                   </Link>
@@ -257,7 +259,7 @@ const Navbar = () => {
                     </div>
                   </div>
                   <Link to="/profile">
-                    <button className="text-white hover:text-purple-300 transition-colors px-3 py-2 rounded-md hover:bg-white/10 text-left w-full">
+                    <button onClick={toggleMenu} className="text-white hover:text-purple-300 transition-colors px-3 py-2 rounded-md hover:bg-white/10 text-left w-full">
                       View Profile
                     </button>
                   </Link>
