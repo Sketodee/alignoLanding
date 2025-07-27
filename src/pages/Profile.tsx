@@ -40,6 +40,10 @@ const Profile = () => {
     navigate('/subscription');
   };
 
+  const handleAffiliateClick = () => {
+    navigate('/affiliate');
+  }
+
   if (!user) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -60,7 +64,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-black pt-20">
       <div className="container mx-auto px-4 py-4 sm:py-8">
-        <div className="max-w-2xl mx-auto">
+        <div className="w-[95%] lg:w-[80%]  mx-auto">
           {/* Header */}
           <div className="bg-zinc-900 rounded-xl p-4 sm:p-6 mb-6 border border-zinc-700/50">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 space-y-4 sm:space-y-0">
@@ -135,10 +139,10 @@ const Profile = () => {
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 border-b border-zinc-700 space-y-1 sm:space-y-0">
                 <span className="text-gray-400 text-sm sm:text-base">Member since</span>
                 <span className="text-white text-sm sm:text-base">
-                  {new Date().toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
+                  {new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
                   })}
                 </span>
               </div>
@@ -148,9 +152,10 @@ const Profile = () => {
                   Active
                 </span>
               </div>
-              <div 
+
+              <div
                 onClick={handleSubscriptionClick}
-                className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 space-y-1 sm:space-y-0 cursor-pointer hover:bg-zinc-800/50 rounded-md px-2 -mx-2 transition-colors group border border-transparent hover:border-zinc-600"
+                className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 space-y-1 sm:space-y-0 cursor-pointer hover:bg-zinc-800/50 rounded-md px-2 -mx-2 transition-colors group border border-transparent hover:border-zinc-600 "
               >
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-400 text-sm sm:text-base">Subscription</span>
@@ -160,16 +165,41 @@ const Profile = () => {
                 </div>
                 <div className="hidden md:block flex items-center space-x-2">
                   {/* <span className="text-purple-400 text-sm sm:text-base">Free Plan</span> */}
-                  <svg 
-                    className="w-4 h-4 text-purple-400 transform transition-transform group-hover:translate-x-1" 
-                    fill="none" 
-                    stroke="currentColor" 
+                  <svg
+                    className="w-4 h-4 text-purple-400 transform transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
               </div>
+
+              <div
+                onClick={handleAffiliateClick}
+                className="flex flex-col sm:flex-row sm:justify-between sm:items-center py-3 space-y-1 sm:space-y-0 cursor-pointer hover:bg-zinc-800/50 rounded-md px-2 -mx-2 transition-colors group border border-transparent hover:border-zinc-600"
+              >
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-400 text-sm sm:text-base">Affiliate</span>
+                  <span className="text-xs text-purple-400 bg-purple-400/10 px-2 py-0.5 rounded-full sm:hidden">
+                    Tap to manage
+                  </span>
+                </div>
+                <div className="hidden md:block flex items-center space-x-2">
+                  {/* <span className="text-purple-400 text-sm sm:text-base">Free Plan</span> */}
+                  <svg
+                    className="w-4 h-4 text-purple-400 transform transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+
+
             </div>
           </div>
 

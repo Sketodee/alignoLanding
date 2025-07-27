@@ -48,8 +48,8 @@ axiosInstance.interceptors.response.use(
       try {
         // Call refresh endpoint (must send cookie with refresh token)
         const response = await axios.post(
-          'https://editlabs-05071851b597.herokuapp.com/api/auth/generaterefreshtoken',
-          // 'http://localhost:8080/api/auth/generaterefreshtoken',
+          // 'https://editlabs-05071851b597.herokuapp.com/api/auth/generaterefreshtoken',
+          `${import.meta.env.VITE_BACKEND_URL}/auth/generaterefreshtoken`,
           {},
           {
             withCredentials: true

@@ -242,7 +242,7 @@ const SubscriptionManagement: React.FC = () => {
                             ← Back
                         </button>
                         )}
-                        <h1 className="text-4xl lg:text-5xl xl:text-6xl mb-4">Manage Your Subscription</h1>
+                        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white  mb-4">Manage Your Subscription</h1>
                     </div>
 
                     <div className="flex justify-center items-center py-20">
@@ -255,20 +255,16 @@ const SubscriptionManagement: React.FC = () => {
 
     return (
         <div className='relative bg-black text-white min-h-screen'>
-            <div className="w-[95%] lg:w-[90%] mx-auto py-10 md:pt-28 md:pb-16">
-                <div className="text-white text-center mb-12">
+            <div className="w-[95%] lg:w-[80%] mx-auto py-10 md:pt-28 md:pb-16">
+                <div className="text-white mb-12">
                     <button
-                        onClick={() => {
-                            // Handle back to pricing navigation here
-                            // Example: window.location.href = '/pricing';
-                            // Or use your router: navigate('/pricing');
-                            console.log('Navigate back to pricing');
+                        onClick={() => {navigate(-1)
                         }}
-                        className="text-purple-400 hover:text-purple-300 mb-4 flex items-center gap-2 mx-auto transition-colors"
+                        className="text-purple-400 hover:text-purple-300 mb-4 gap-2 mx-auto transition-colors"
                     >
-                        ← Back to Pricing
+                        ← Back 
                     </button>
-                    <h1 className="text-4xl lg:text-5xl xl:text-6xl mb-4">Manage Your Subscription</h1>
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">Manage Your Subscription</h1>
                     <p className="text-[#858381] font-extralight">
                         {currentSubscription ? 'Manage your current plan' : 'Choose your plan to get started'}
                     </p>
@@ -276,7 +272,7 @@ const SubscriptionManagement: React.FC = () => {
 
                 {currentSubscription ? (
                     /* Has Active Subscription */
-                    <div className="max-w-4xl mx-auto">
+                    <div className="mx-auto">
                         {/* Current Subscription Card */}
                         <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-3xl p-8 mb-8">
                             <div className="flex items-center justify-between mb-6">
@@ -384,8 +380,8 @@ const SubscriptionManagement: React.FC = () => {
                     </div>
                 ) : (
                     /* No Subscription - Show Plans */
-                    <div className="max-w-6xl mx-auto">
-                        <div className="text-center mb-8">
+                    <div className="mx-auto">
+                        <div className=" mb-8">
                             <p className="text-gray-400 mb-6">You don't have an active subscription. Choose a plan to get started:</p>
                         </div>
 

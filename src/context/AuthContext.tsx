@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const decoded = jwtDecode<{ UserInfo: User }>(token);
     setUser(decoded.UserInfo);
     console.log('User logged in:', decoded.UserInfo);
-    navigate('/home');
+    navigate('/');
   };
 
   // const loginWithGoogle = async (credential: string) => {

@@ -5,7 +5,6 @@ import WhyChooseUs from '../components/WhyChooseUs'
 import AlignoHelp from '../components/AlignoHelp'
 import Testimonials from '../components/Testimonials'
 import HelpSection from '../components/HelpSection'
-import Footer from '../components/Footer'
 import PaymentPlan from '../components/PaymentPlan'
 
 const Home = () => {
@@ -27,7 +26,6 @@ const Home = () => {
         <PaymentPlan />
       </section>
       <HelpSection />
-      <Footer />
     </>
   )
 }
