@@ -1,6 +1,5 @@
 
 import Logos from "./Logos";
-import Navbar from "./Navbar";
 import PurpleGridContainer from "./PurpleGrid";
 
 const DarkGradient = () => {
