@@ -65,39 +65,39 @@ const ManageAffiliates = () => {
     const [openDropdown, setOpenDropdown] = useState<number | null>(null);
     const navigate = useNavigate();
 
-    const fetchAffiliates = async (page: number = 1) => {
-        try {
-            setLoading(true);
-            setError(null);
+    // const fetchAffiliates = async (page: number = 1) => {
+    //     try {
+    //         setLoading(true);
+    //         setError(null);
 
-            const params = new URLSearchParams({
-                page: page.toString(),
-                limit: pagination.itemsPerPage.toString(),
-            });
+    //         const params = new URLSearchParams({
+    //             page: page.toString(),
+    //             limit: pagination.itemsPerPage.toString(),
+    //         });
 
-            if (filters.status !== 'all') {
-                params.append('status', filters.status);
-            }
+    //         if (filters.status !== 'all') {
+    //             params.append('status', filters.status);
+    //         }
 
-            if (filters.search.trim()) {
-                params.append('search', filters.search.trim());
-            }
+    //         if (filters.search.trim()) {
+    //             params.append('search', filters.search.trim());
+    //         }
 
-            const response = await axiosInstance.get(`affiliate/admin/getallaffiliates?${params}`);
+    //         const response = await axiosInstance.get(`affiliate/admin/getallaffiliates?${params}`);
 
-            if (response.data.success) {
-                setAffiliates(response.data.data.affiliates);
-                setPagination(response.data.data.pagination);
-            } else {
-                throw new Error(response.data.message || 'Failed to fetch affiliates');
-            }
-        } catch (err: any) {
-            console.error('Error fetching affiliates:', err);
-            setError(err.response?.data?.message || 'Failed to load affiliates');
-        } finally {
-            setLoading(false);
-        }
-    };
+    //         if (response.data.success) {
+    //             setAffiliates(response.data.data.affiliates);
+    //             setPagination(response.data.data.pagination);
+    //         } else {
+    //             throw new Error(response.data.message || 'Failed to fetch affiliates');
+    //         }
+    //     } catch (err: any) {
+    //         console.error('Error fetching affiliates:', err);
+    //         setError(err.response?.data?.message || 'Failed to load affiliates');
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     const updateAffiliateStatus = async (affiliateId: number, status: AffiliateStatus) => {
         try {
