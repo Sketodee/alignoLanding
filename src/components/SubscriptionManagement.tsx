@@ -1,21 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { SubscriptionPlan } from '../types/appScopeTypes';
 import axiosInstance from '../utils/auth';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import usePreviousPath from '../hooks/usePreviousPath';
-
-interface Subscription {
-    id: number;
-    plan: string;
-    status: 'active' | 'cancelled' | 'expired';
-    productKey: string;
-    currentPeriodStart: string;
-    currentPeriodEnd: string;
-    trialStart: string | null;
-    trialEnd: string | null;
-    isTrialing: boolean;
-}
+import useSubscriptionStatus from '../hooks/useSubscriptionStatus'; // Import the new hook
 
 interface PricingPlan {
     type: string;
@@ -28,13 +17,12 @@ interface PricingPlan {
     isPopular?: boolean;
 }
 
-
 const SubscriptionManagement: React.FC = () => {
-    const [currentSubscription, setCurrentSubscription] = useState<Subscription | null>(null);
-    const [loading, setLoading] = useState(true);
+    // Use the custom hook instead of local state and function
+    const { currentSubscription, loading, error, refetch } = useSubscriptionStatus();
+    
     const [actionLoading, setActionLoading] = useState(false);
-    const [subscribing, setSubscribing] = useState(false);
-    const [, setPollingAttempts] = useState(0);
+    const [, setSubscribing] = useState(false);
     const { user } = useAuth();
     const navigate = useNavigate();
     const prevPath = usePreviousPath();
@@ -90,49 +78,6 @@ const SubscriptionManagement: React.FC = () => {
         }
     ];
 
-    const checkSubscriptionStatus = async () => {
-        if (!user?.id) {
-            setLoading(false);
-            return;
-        }
-
-        try {
-            const res = await axiosInstance.get(`/subscription/user/${user.id}`);
-
-            console.log('Subscription data:', res.data);
-
-            if (res.status === 200 && res.data) {
-                setCurrentSubscription(res.data);
-                setSubscribing(false);
-                setPollingAttempts(0);
-            } else {
-                setCurrentSubscription(null);
-            }
-        } catch (error: any) {
-            console.error('Error checking subscription:', error);
-
-            // Check if it's a 404 error (no subscription found)
-            if (error.response && error.response.status === 404) {
-                setCurrentSubscription(null);
-                if (subscribing) {
-                    // Continue polling if we're in subscription process
-                    return;
-                }
-            } else {
-                // For other errors, also set to null if not subscribing
-                if (!subscribing) {
-                    setCurrentSubscription(null);
-                }
-            }
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        checkSubscriptionStatus();
-    }, [user?.id]);
-
     const handleSubscribe = async (planType: string) => {
         if (!user?.id) {
             console.error('User not found');
@@ -182,8 +127,8 @@ const SubscriptionManagement: React.FC = () => {
             // Replace with your actual cancel subscription endpoint
             // await axiosInstance.post(`/subscription/${currentSubscription.id}/cancel`);
 
-            // Refresh subscription status
-            await checkSubscriptionStatus();
+            // Refresh subscription status using the hook's refetch function
+            await refetch();
 
         } catch (error) {
             console.error('Error cancelling subscription:', error);
@@ -201,8 +146,8 @@ const SubscriptionManagement: React.FC = () => {
             // Replace with your actual reactivate subscription endpoint
             // await axiosInstance.post(`/subscription/${currentSubscription.id}/reactivate`);
 
-            // Refresh subscription status
-            await checkSubscriptionStatus();
+            // Refresh subscription status using the hook's refetch function
+            await refetch();
 
         } catch (error) {
             console.error('Error reactivating subscription:', error);
@@ -228,6 +173,65 @@ const SubscriptionManagement: React.FC = () => {
         const plan = plans.find(p => p.type === planType);
         return plan ? `${plan.price}${plan.period}` : 'Unknown Amount';
     };
+
+    const handleDownload = (platform: 'windows' | 'mac') => {
+        // Dummy file URLs - replace with your actual application downloads
+        const downloadUrls = {
+            windows: 'https://the.earth.li/~sgtatham/putty/latest/wa64/putty.exe', // PuTTY as dummy Windows exe
+            mac: 'https://github.com/microsoft/vscode/releases/download/1.85.0/VSCode-darwin-universal.zip' // VS Code as dummy Mac app
+        };
+
+        const fileNames = {
+            windows: `YourApp-Windows-v1.0.exe`,
+            mac: `YourApp-Mac-v1.0.zip`
+        };
+
+        console.log(`Downloading ${platform} application...`);
+        
+        // Create a temporary anchor element to trigger download
+        const link = document.createElement('a');
+        link.href = downloadUrls[platform];
+        link.download = fileNames[platform];
+        link.target = '_blank';
+        
+        // Append to body, click, and remove
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    // Show error state if there's an error
+    if (error) {
+        return (
+            <div className='relative bg-black text-white min-h-screen'>
+                <div className="w-[95%] lg:w-[90%] mx-auto py-10 md:pt-28 md:pb-16">
+                    <div className="text-white text-center mb-12">
+                        {(prevPath === '/home' || prevPath === '/profile') && (
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="text-purple-400 hover:text-purple-300 mb-4 flex items-center gap-2 mx-auto transition-colors"
+                            >
+                                ← Back
+                            </button>
+                        )}
+                        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">Manage Your Subscription</h1>
+                    </div>
+
+                    <div className="flex flex-col justify-center items-center py-20">
+                        <div className="text-red-400 text-center">
+                            <p className="mb-4">Error loading subscription: {error}</p>
+                            <button
+                                onClick={() => refetch()}
+                                className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded"
+                            >
+                                Try Again
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     if (loading) {
         return (
@@ -356,7 +360,7 @@ const SubscriptionManagement: React.FC = () => {
                         </div>
 
                         {/* Subscription Details */}
-                        <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-3xl p-8">
+                        <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-3xl p-8 mb-8">
                             <h3 className="text-xl font-semibold text-white mb-6">Subscription Details</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
@@ -375,6 +379,56 @@ const SubscriptionManagement: React.FC = () => {
                                     <p className="text-gray-400 text-sm mb-1">Plan Type</p>
                                     <p className="text-white capitalize">{currentSubscription.plan}</p>
                                 </div>
+                            </div>
+                        </div>
+
+                        {/* Download Applications */}
+                        <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-3xl p-8">
+                            <h3 className="text-xl font-semibold text-white mb-6">Download Applications</h3>
+                            <p className="text-gray-400 text-sm mb-6">Download the desktop application for your operating system</p>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {/* Windows Download */}
+                                <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-600 hover:border-purple-400 transition-all duration-200">
+                                    <div className="flex items-center mb-4">
+                                        <div className="text-3xl mr-4">🪟</div>
+                                        <div>
+                                            <h4 className="text-white font-semibold text-lg">Windows</h4>
+                                            <p className="text-gray-400 text-sm">Windows 10 or later</p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => handleDownload('windows')}
+                                        className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white py-3 px-6 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2"
+                                    >
+                                        <span>⬇️</span>
+                                        Download for Windows
+                                    </button>
+                                </div>
+
+                                {/* Mac Download */}
+                                <div className="bg-gray-800/50 rounded-xl p-6 border border-gray-600 hover:border-purple-400 transition-all duration-200">
+                                    <div className="flex items-center mb-4">
+                                        <div className="text-3xl mr-4">🍎</div>
+                                        <div>
+                                            <h4 className="text-white font-semibold text-lg">macOS</h4>
+                                            <p className="text-gray-400 text-sm">macOS 10.15 or later</p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={() => handleDownload('mac')}
+                                        className="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white py-3 px-6 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2"
+                                    >
+                                        <span>⬇️</span>
+                                        Download for Mac
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="mt-6 bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+                                <p className="text-blue-400 text-sm">
+                                    <strong>Note:</strong> You'll need your product key ({currentSubscription.productKey}) to activate the application after installation.
+                                </p>
                             </div>
                         </div>
                     </div>
