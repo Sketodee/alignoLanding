@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { SubscriptionPlan } from '../types/appScopeTypes';
+import { SubscriptionPlan, SubscriptionStatus } from '../types/appScopeTypes';
 import axiosInstance from '../utils/auth';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import usePreviousPath from '../hooks/usePreviousPath';
-import useSubscriptionStatus from '../hooks/useSubscriptionStatus'; // Import the new hook
+import useSubscriptionStatus from '../hooks/useSubscriptionStatus';
 
 interface PricingPlan {
     type: string;
@@ -21,8 +21,10 @@ const SubscriptionManagement: React.FC = () => {
     // Use the custom hook instead of local state and function
     const { currentSubscription, loading, error, refetch } = useSubscriptionStatus();
     
+    
     const [actionLoading, setActionLoading] = useState(false);
     const [, setSubscribing] = useState(false);
+    const [cancelMessage, setCancelMessage] = useState<string | null>(null);
     const { user } = useAuth();
     const navigate = useNavigate();
     const prevPath = usePreviousPath();
@@ -119,19 +121,36 @@ const SubscriptionManagement: React.FC = () => {
     };
 
     const handleCancelSubscription = async () => {
-        if (!currentSubscription) return;
+        if (!currentSubscription || !user?.id) return;
 
         setActionLoading(true);
 
         try {
-            // Replace with your actual cancel subscription endpoint
-            // await axiosInstance.post(`/subscription/${currentSubscription.id}/cancel`);
+            const response = await axiosInstance.post(`/subscription/user/cancel/${user.id}`);
 
-            // Refresh subscription status using the hook's refetch function
-            await refetch();
+            if (response.status === 200) {
+                // Show temporary success message
+                setCancelMessage('Subscription canceled successfully! Your subscription will remain active until the next billing date.');
+                
+                // Hide the message after 5 seconds
+                setTimeout(() => {
+                    setCancelMessage(null);
+                }, 5000);
 
-        } catch (error) {
+                // Refresh subscription status using the hook's refetch function
+                await refetch();
+            }
+
+        } catch (error: any) {
             console.error('Error cancelling subscription:', error);
+            
+            // Show error message if available
+            if (error.response?.data?.message) {
+                setCancelMessage(`Error: ${error.response.data.message}`);
+                setTimeout(() => {
+                    setCancelMessage(null);
+                }, 5000);
+            }
         } finally {
             setActionLoading(false);
         }
@@ -274,6 +293,16 @@ const SubscriptionManagement: React.FC = () => {
                     </p>
                 </div>
 
+                {/* Temporary Cancel Message */}
+                {cancelMessage && (
+                    <div className={`mb-6 p-4 rounded-xl border ${cancelMessage.startsWith('Error') 
+                        ? 'bg-red-500/10 border-red-500/30 text-red-400' 
+                        : 'bg-green-500/10 border-green-500/30 text-green-400'
+                    }`}>
+                        <p className="text-sm font-medium">{cancelMessage}</p>
+                    </div>
+                )}
+
                 {currentSubscription ? (
                     /* Has Active Subscription */
                     <div className="mx-auto">
@@ -281,14 +310,14 @@ const SubscriptionManagement: React.FC = () => {
                         <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-700 rounded-3xl p-8 mb-8">
                             <div className="flex items-center justify-between mb-6">
                                 <h2 className="text-2xl font-semibold text-white">Current Subscription</h2>
-                                <span className={`px-4 py-2 rounded-full text-sm font-medium ${currentSubscription.status === 'active'
+                                <span className={`px-4 py-2 rounded-full text-sm font-medium ${currentSubscription.status === SubscriptionStatus.ACTIVE
                                         ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                                        : currentSubscription.status === 'cancelled'
+                                        : currentSubscription?.status === SubscriptionStatus.CANCELED
                                             ? 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
                                             : 'bg-red-500/20 text-red-400 border border-red-500/30'
                                     }`}>
-                                    {currentSubscription.status === 'active' ? 'Active' :
-                                        currentSubscription.status === 'cancelled' ? 'Cancelled' : 'Expired'}
+                                    {currentSubscription.status === SubscriptionStatus.ACTIVE ? 'Active' :
+                                        currentSubscription?.status === SubscriptionStatus.CANCELED? 'Cancelled' : 'Expired'}
                                 </span>
                             </div>
 
@@ -303,7 +332,7 @@ const SubscriptionManagement: React.FC = () => {
                                 </div>
                                 <div className="text-center md:text-left">
                                     <p className="text-gray-400 text-sm mb-1">
-                                        {currentSubscription.status === 'active' ? 'Next Billing' : 'Period End'}
+                                        {currentSubscription.status === SubscriptionStatus.ACTIVE ? 'Next Billing' : 'Period End'}
                                     </p>
                                     <p className="text-white font-semibold text-lg">
                                         {formatDate(currentSubscription.currentPeriodEnd)}
@@ -326,7 +355,7 @@ const SubscriptionManagement: React.FC = () => {
                                 </div>
                             )}
 
-                            {currentSubscription.status === 'cancelled' && (
+                            {currentSubscription?.status === SubscriptionStatus.CANCELED && (
                                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 mb-6">
                                     <p className="text-yellow-400 text-sm">
                                         Your subscription has been cancelled but remains active until {formatDate(currentSubscription.currentPeriodEnd)}.
@@ -339,13 +368,13 @@ const SubscriptionManagement: React.FC = () => {
                                     Change Plan
                                 </button>
 
-                                {currentSubscription.status === 'active' ? (
+                                {currentSubscription.status === SubscriptionStatus.ACTIVE && !currentSubscription.cancelAtPeriodEnd  ? (
                                     <button
                                         onClick={handleCancelSubscription}
                                         disabled={actionLoading}
                                         className="flex-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 py-3 px-6 rounded-xl font-medium transition-colors disabled:opacity-50"
                                     >
-                                        {actionLoading ? 'Processing...' : 'Cancel Subscription'}
+                                        {actionLoading ? 'Processing...' : 'Cancel Subscription'} 
                                     </button>
                                 ) : (
                                     <button

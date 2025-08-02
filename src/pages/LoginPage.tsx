@@ -14,7 +14,7 @@ interface LoginErrors {
 type LoginStep = 'email' | 'otp';
 
 const LoginPage: React.FC = () => {
-    const { login } = useAuth();
+    const { login, isAuthenticated, loading } = useAuth();
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
     const [otp, setOtp] = useState<string>('');
@@ -23,6 +23,18 @@ const LoginPage: React.FC = () => {
     const [errors, setErrors] = useState<LoginErrors>({});
     const [countdown, setCountdown] = useState<number>(0);
     const [isResendDisabled, setIsResendDisabled] = useState<boolean>(false);
+
+    if (isAuthenticated) {
+    return null; // Don't render anything, redirect will happen via AuthProvider
+  }
+
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-black">
+        <div className="text-white text-xl">Loading...</div>
+      </div>
+    );
+  }
 
 
     // Countdown timer effect

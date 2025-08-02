@@ -1,6 +1,7 @@
 import axiosInstance from '../../utils/auth';
 import { useState } from 'react';
 import { HiCreditCard, HiCurrencyDollar, HiMail } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 
 interface AffiliateApplicationProps {
     onSuccess: () => void;
@@ -9,6 +10,8 @@ interface AffiliateApplicationProps {
 const AffiliateApplication = ({ onSuccess }: AffiliateApplicationProps) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
+    
     const [formData, setFormData] = useState({
         paymentMethod: 'paypal',
         paymentDetails: {
@@ -102,8 +105,16 @@ const AffiliateApplication = ({ onSuccess }: AffiliateApplicationProps) => {
     return (
         <div className="min-h-screen text-white flex items-center justify-center px-8">
             <div className="w-full">
+                <div className="mb-4">
+                        <button
+                            onClick={() => navigate(-1)}
+                            className="text-purple-400 hover:text-purple-300 flex items-center gap-2 transition-colors text-sm sm:text-base"
+                        >
+                            ← Back
+                        </button>
+                    </div>
                 {/* Header */}
-                <div className="text-center mb-8">
+                <div className=" mb-8">
                     <h1 className="text-4xl font-bold mb-4">
                         Join Our{' '}
                         <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">

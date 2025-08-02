@@ -148,7 +148,7 @@ const Navbar = () => {
                       Login 
                     </button>
                   </Link>
-                  <Link to="/signin">
+                  <Link to="/register">
                     <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1.5 rounded-md transition-colors font-medium">
                       Sign Up
                     </button>
@@ -241,7 +241,7 @@ const Navbar = () => {
                       Login
                     </button>
                   </Link>
-                  <Link to="/signin">
+                  <Link to="/register">
                     <button onClick={toggleMenu} className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md transition-colors font-medium w-full">
                       Sign Up
                     </button>

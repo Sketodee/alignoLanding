@@ -3,6 +3,7 @@ import { AllowedProviders, UserType } from '../types/appScopeTypes';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GoogleSignIn from './GoogleSignIn';
+import { useAuth } from '../context/AuthContext';
 // import editLab from '../assets/images/editLab.png'
 
 const SignIn = () => {
@@ -10,17 +11,19 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const { isAuthenticated, loading } = useAuth();
 
-//   const handleAuthWithGoogle = async () => {
-//     const user = await window.context.loginWithGoogle();
-//     setTempUser(user);
-//   };
+  if (isAuthenticated) {
+    return null; // Don't render anything, redirect will happen via AuthProvider
+  }
 
-//   useEffect(() => {
-//     if (isAuthenticated) {
-//       navigate('/');
-//     }
-//   }, [isAuthenticated, navigate])
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-black">
+        <div className="text-white text-xl">Loading...</div>
+      </div>
+    );
+  }
 
  
   const validate = () => {

@@ -1,17 +1,19 @@
 import { useState, useEffect, useCallback } from 'react';
 import axiosInstance from '../utils/auth';
 import { useAuth } from '../context/AuthContext';
+import type { SubscriptionStatus } from '../types/appScopeTypes';
 
 interface Subscription {
     id: number;
     plan: string;
-    status: 'active' | 'cancelled' | 'expired';
+    status: SubscriptionStatus
     productKey: string;
     currentPeriodStart: string;
     currentPeriodEnd: string;
     trialStart: string | null;
     trialEnd: string | null;
     isTrialing: boolean;
+    cancelAtPeriodEnd: boolean;
 }
 
 interface UseSubscriptionReturn {
@@ -38,8 +40,6 @@ const useSubscriptionStatus = (autoFetch: boolean = true): UseSubscriptionReturn
         try {
             setError(null);
             const res = await axiosInstance.get(`/subscription/user/${user.id}`);
-
-            console.log('Subscription data:', res.data);
 
             if (res.status === 200 && res.data) {
                 setCurrentSubscription(res.data);

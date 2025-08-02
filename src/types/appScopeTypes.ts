@@ -25,3 +25,14 @@ export const SubscriptionPlan = {
   YEARLY: 'yearly'
 } as const;
 export type SubscriptionPlan = typeof SubscriptionPlan[keyof typeof SubscriptionPlan];
+
+export const SubscriptionStatus = {
+  ACTIVE: 'active',
+  CANCELED: 'canceled',
+  PAST_DUE: 'past_due',
+  UNPAID: 'unpaid',
+  TRIALING: 'trialing',
+  INCOMPLETE: 'incomplete',
+  INCOMPLETE_EXPIRED: 'incomplete_expired'
+} as const;
+export type SubscriptionStatus = typeof SubscriptionStatus[keyof typeof SubscriptionStatus];
