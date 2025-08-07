@@ -8,6 +8,7 @@ import SubscriptionManagement from "./components/SubscriptionManagement"
 import Affiliate from "./pages/Affiliate"
 import ManageAffiliates from "./components/affiliates/ManageAffiliates"
 import Footer from "./components/Footer"
+import AIChatbot from "./pages/ChatBot"
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/affiliate/manage" element={<ManageAffiliates />} />
     </Routes>
     <Footer />
+    <AIChatbot />
     
     </>
   )
