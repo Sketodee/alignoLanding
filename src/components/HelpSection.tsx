@@ -15,8 +15,10 @@ const HelpSection: React.FC = () => {
    const handleDownload = (platform: 'windows' | 'mac') => {
         const downloadUrls = {
             windows: 'https://github.com/Sketodee/alignoLanding/releases/download/app/editlab_setup.exe', // PuTTY as dummy Windows exe
-            mac: 'https://github.com/Sketodee/alignoLanding/releases/download/app/editlab_setup.exe' // VS Code as dummy Mac app
+            mac: 'https://github.com/Sketodee/alignoLanding/releases/download/macApp/editlab_setup-1.0.0.dmg' // VS Code as dummy Mac app
         };
+
+        
 
         const fileNames = {
             windows: `editlab.exe`,
