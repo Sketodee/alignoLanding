@@ -104,12 +104,6 @@ const TestimonialSlides = () => {
     });
   };
 
-  const getVisibleTestimonials = () => {
-    const startIndex = currentIndex;
-    const endIndex = startIndex + 3; // Show up to 3 testimonials
-    return extendedTestimonials.slice(startIndex, endIndex);
-  };
-
   return (
     <div className="bg-black">
       <div 
