@@ -31,7 +31,7 @@ INSTRUCTIONS:
         model="gpt-4"
         maxTokens={800}
         temperature={0.3}
-        chatTitle="EditLab Support" />
+        chatTitle="EditLabs Support" />
   )
 }
 

@@ -68,3 +68,9 @@ interface SubDescription {
   title: string
   description: string
 }
+
+export const PluginType = {
+  PREMIEREPRO: 'premierepro',
+  AFTEREFFECTS: 'aftereffects'
+} as const;
+export type PluginType = typeof PluginType[keyof typeof PluginType];

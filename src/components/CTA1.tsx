@@ -3,7 +3,7 @@ const CTA1 = () => {
   return (
     <div className="py-24 md:py-32 w-[95%] lg:w-[80%] mx-auto">
         <p className="text-3xl md:text-5xl text-[#1D1D1D] font-medium text-center">Take the first step towards 
-            😇 stress-free project management with EditLab 👋 Simplify tasks, boost productivity</p>
+            😇 stress-free project management with EditLabs 👋 Simplify tasks, boost productivity</p>
 
 <div className="p-0.5 rounded-full border-1 border-purple-600 w-[150px] mx-auto mt-10">
         {/* Inner glowing border with shadow */}

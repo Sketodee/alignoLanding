@@ -11,6 +11,7 @@ import Footer from "./components/Footer"
 import AIChatbot from "./pages/ChatBot"
 import PluginPage from "./pages/PluginPage"
 import PluginDetailPage from "./pages/PluginDetailPage"
+import CreatePlugin from "./components/createPlugin/CreatePlugin"
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
       <Route path="/affiliate" element={<Affiliate />} />
       <Route path="/plugins" element={<PluginPage />} />
       <Route path="/plugins/:id" element={<PluginDetailPage />} />
+      <Route path="/plugins/create-plugin" element={<CreatePlugin />} />
         <Route path="/affiliate/manage" element={<ManageAffiliates />} />
     </Routes>
     <Footer />

@@ -15,6 +15,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Remove overflow from html and body */
+html, body {
+  overflow-x: hidden;
+}
+
+/* More comprehensive reset */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Only horizontal overflow */
+}
+
 /* a {
   font-weight: 500;
   color: #646cff;

@@ -1,7 +1,10 @@
 import axiosInstance from '../utils/auth';
 import { useEffect, useState } from 'react';
+import { FiPlus } from 'react-icons/fi';
 import { HiChevronLeft, HiChevronRight, HiOutlineSearch } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { UserType } from '../types/appScopeTypes';
 
 interface Plugin {
     id: number;
@@ -27,6 +30,7 @@ const PluginPage = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
     const [searchTimeout, setSearchTimeout] = useState<ReturnType<typeof setTimeout> | null>(null);
+    const { user } = useAuth();
 
     const ITEMS_PER_PAGE = 10;
 
@@ -201,56 +205,66 @@ const PluginPage = () => {
         <div className="bg-[#0a0a0a] text-white pt-20">
             <div className="w-[95%] lg:w-[90%] mx-auto " >
                 {/* Header Section */}
-                  <button
-                                onClick={() => navigate(-1)}
-                                className="text-purple-400 hover:text-purple-300 mb-4  transition-colors"
-                            >
-                                ← Back
-                            </button>
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">Plugins</h1>
-                  
+                <button
+                    onClick={() => navigate(-1)}
+                    className="text-purple-400 hover:text-purple-300 mb-4  transition-colors"
+                >
+                    ← Back
+                </button>
+                <div className='flex items-center justify-between '>
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">Plugins</h1>
+                    {user && user.userType === UserType.ADMIN && (
+                        <button
+                            onClick={() => navigate('/plugins/create-plugin')}
+                            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2.5 rounded-lg flex items-center space-x-2 transition-colors duration-200 shadow-sm"
+                        >
+                            <FiPlus className="w-4 h-4" />
+                            <span>Add Plugin</span>
+                        </button>
+                    )}
+                </div>
+
 
 
                 {/* Filter and Search Section */}
-               <div className="py-6 border-b border-gray-800">
-  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-    {/* Filters */}
-    <div className="flex flex-wrap gap-2 border-[0.5px] rounded-lg border-[#242424] p-2">
-      {['All', 'Premiere Pro', 'After Effect'].map((filter) => (
-        <button
-          key={filter}
-          onClick={() => handleFilterClick(filter)}
-          disabled={loading}
-          className={`px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
-            activeFilter === filter
-              ? 'text-white bg-[#191919] rounded-lg'
-              : 'text-gray-400 hover:text-white'
-          }`}
-        >
-          {filter}
-        </button>
-      ))}
-    </div>
+                <div className="py-6 border-b border-gray-800">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        {/* Filters */}
+                        <div className="flex flex-wrap gap-2 border-[0.5px] rounded-lg border-[#242424] p-2">
+                            {['All', 'Premiere Pro', 'After Effect'].map((filter) => (
+                                <button
+                                    key={filter}
+                                    onClick={() => handleFilterClick(filter)}
+                                    disabled={loading}
+                                    className={`px-4 py-2 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${activeFilter === filter
+                                        ? 'text-white bg-[#191919] rounded-lg'
+                                        : 'text-gray-400 hover:text-white'
+                                        }`}
+                                >
+                                    {filter}
+                                </button>
+                            ))}
+                        </div>
 
-    {/* Search & Info */}
-    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3 w-full md:w-auto">
-      <div className="text-sm text-gray-400">
-        {totalItems > 0 && `${totalItems} plugin${totalItems !== 1 ? 's' : ''} found`}
-      </div>
-      <div className="relative w-full sm:w-64">
-        <HiOutlineSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search plugins..."
-          value={searchTerm}
-          onChange={handleSearchChange}
-          disabled={loading}
-          className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-        />
-      </div>
-    </div>
-  </div>
-</div>
+                        {/* Search & Info */}
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3 w-full md:w-auto">
+                            <div className="text-sm text-gray-400">
+                                {totalItems > 0 && `${totalItems} plugin${totalItems !== 1 ? 's' : ''} found`}
+                            </div>
+                            <div className="relative w-full sm:w-64">
+                                <HiOutlineSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                                <input
+                                    type="text"
+                                    placeholder="Search plugins..."
+                                    value={searchTerm}
+                                    onChange={handleSearchChange}
+                                    disabled={loading}
+                                    className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 {/* Loading State */}
                 {loading && (
