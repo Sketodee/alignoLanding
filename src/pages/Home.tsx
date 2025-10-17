@@ -22,6 +22,7 @@ const Home = () => {
       <section id="testimonials">
         <Testimonials />
       </section>
+      {/* <FeatureCards /> */}
       <section id="pricing">
         <PaymentPlan />
       </section>

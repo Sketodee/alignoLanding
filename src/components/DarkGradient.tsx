@@ -6,7 +6,7 @@ const DarkGradient = () => {
 
 
   return (
-   <div className="relative w-full h-[844px] lg:h-[1080px] xl:h-[800px] bg-black overflow-hidden ">
+   <div className="relative w-full h-[544px] md:h-[744px] lg:h-[880px] xl:h-[1000px] bg-black overflow-hidden ">
   {/* Top left purple gradient */}
   <div className="
       absolute aspect-square rounded-full bg-gradient-to-br from-purple-400 to-transparent opacity-40 [filter:blur(64px)] transform-gpu
@@ -35,7 +35,7 @@ const DarkGradient = () => {
   </div>
 
       {/* Bottom-aligned hello div */}
-    <div className="absolute bottom-0 w-full h-60 bg-transparent flex items-center justify-center ">
+    <div className="absolute bottom-0 w-full h-60 bg-transparent flex items-center py-30 justify-center ">
      <Logos />
     </div>
 </div>

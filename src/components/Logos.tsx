@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 
 const LogoCarousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef(null);
   
+  // Company logos - using placeholder images
   const logos = [
     // Logo 1
     <svg key="logo1" xmlns="http://www.w3.org/2000/svg" width="169" height="41" fill="none"><g transform="translate(0.79 0.923)"><path d="M 48.96 28.03 L 60.912 28.03 L 60.912 24.43 L 53.208 24.43 L 53.208 10.87 L 48.96 10.87 Z" fill="rgb(255, 255, 255)"></path><path d="M 67.994 25.629 C 66.29 25.629 65.402 24.141 65.402 21.909 C 65.402 19.677 66.29 18.165 67.994 18.165 C 69.698 18.165 70.61 19.677 70.61 21.909 C 70.61 24.141 69.698 25.629 67.994 25.629 Z M 68.018 28.413 C 71.978 28.413 74.57 25.605 74.57 21.909 C 74.57 18.213 71.978 15.405 68.018 15.405 C 64.082 15.405 61.442 18.213 61.442 21.909 C 61.442 25.605 64.082 28.413 68.018 28.413 Z" fill="rgb(255, 255, 255)"></path><path d="M 81.424 32.277 C 83.248 32.277 84.856 31.869 85.936 30.909 C 86.92 30.021 87.568 28.677 87.568 26.829 L 87.568 15.741 L 83.824 15.741 L 83.824 17.061 L 83.776 17.061 C 83.056 16.029 81.952 15.381 80.32 15.381 C 77.272 15.381 75.16 17.925 75.16 21.525 C 75.16 25.293 77.728 27.357 80.488 27.357 C 81.976 27.357 82.912 26.757 83.632 25.941 L 83.728 25.941 L 83.728 27.165 C 83.728 28.653 83.032 29.517 81.376 29.517 C 80.08 29.517 79.432 28.965 79.216 28.317 L 75.424 28.317 C 75.808 30.885 78.04 32.277 81.424 32.277 Z M 81.4 24.453 C 79.936 24.453 78.976 23.253 78.976 21.405 C 78.976 19.533 79.936 18.333 81.4 18.333 C 83.032 18.333 83.896 19.725 83.896 21.381 C 83.896 23.109 83.104 24.453 81.4 24.453 Z" fill="rgb(255, 255, 255)"></path><path d="M 95.266 25.629 C 93.562 25.629 92.674 24.141 92.674 21.909 C 92.674 19.677 93.562 18.165 95.266 18.165 C 96.97 18.165 97.882 19.677 97.882 21.909 C 97.882 24.141 96.97 25.629 95.266 25.629 Z M 95.29 28.413 C 99.25 28.413 101.842 25.605 101.842 21.909 C 101.842 18.213 99.25 15.405 95.29 15.405 C 91.354 15.405 88.714 18.213 88.714 21.909 C 88.714 25.605 91.354 28.413 95.29 28.413 Z" fill="rgb(255, 255, 255)"></path><path d="M 102.985 28.03 L 106.897 28.03 L 106.897 15.742 L 102.985 15.742 Z M 102.985 14.038 L 106.897 14.038 L 106.897 10.87 L 102.985 10.87 Z" fill="rgb(255, 255, 255)"></path><path d="M 108.594 32.085 L 112.506 32.085 L 112.506 26.757 L 112.554 26.757 C 113.322 27.789 114.45 28.413 116.034 28.413 C 119.25 28.413 121.386 25.869 121.386 21.885 C 121.386 18.189 119.394 15.381 116.13 15.381 C 114.45 15.381 113.25 16.125 112.41 17.229 L 112.338 17.229 L 112.338 15.741 L 108.594 15.741 Z M 115.026 25.389 C 113.346 25.389 112.386 24.021 112.386 22.029 C 112.386 20.037 113.25 18.525 114.954 18.525 C 116.634 18.525 117.426 19.917 117.426 22.029 C 117.426 24.117 116.514 25.389 115.026 25.389 Z" fill="rgb(255, 255, 255)"></path><path d="M 127.755 28.413 C 130.971 28.413 133.347 27.021 133.347 24.333 C 133.347 21.189 130.803 20.637 128.643 20.277 C 127.083 19.989 125.691 19.869 125.691 19.005 C 125.691 18.237 126.435 17.877 127.395 17.877 C 128.475 17.877 129.219 18.213 129.363 19.317 L 132.963 19.317 C 132.771 16.893 130.899 15.381 127.419 15.381 C 124.515 15.381 122.115 16.725 122.115 19.317 C 122.115 22.197 124.395 22.773 126.531 23.133 C 128.163 23.421 129.651 23.541 129.651 24.645 C 129.651 25.437 128.907 25.869 127.731 25.869 C 126.435 25.869 125.619 25.269 125.475 24.045 L 121.779 24.045 C 121.899 26.757 124.155 28.413 127.755 28.413 Z" fill="rgb(255, 255, 255)"></path><path d="M 138.661 28.389 C 140.365 28.389 141.445 27.717 142.333 26.517 L 142.405 26.517 L 142.405 28.029 L 146.149 28.029 L 146.149 15.741 L 142.237 15.741 L 142.237 22.605 C 142.237 24.069 141.421 25.077 140.077 25.077 C 138.829 25.077 138.229 24.333 138.229 22.989 L 138.229 15.741 L 134.341 15.741 L 134.341 23.805 C 134.341 26.541 135.829 28.389 138.661 28.389 Z" fill="rgb(255, 255, 255)"></path><path d="M 147.851 28.029 L 151.763 28.029 L 151.763 21.141 C 151.763 19.677 152.483 18.645 153.707 18.645 C 154.883 18.645 155.435 19.413 155.435 20.733 L 155.435 28.029 L 159.347 28.029 L 159.347 21.141 C 159.347 19.677 160.043 18.645 161.291 18.645 C 162.467 18.645 163.019 19.413 163.019 20.733 L 163.019 28.029 L 166.931 28.029 L 166.931 20.037 C 166.931 17.277 165.539 15.381 162.755 15.381 C 161.171 15.381 159.851 16.053 158.891 17.541 L 158.843 17.541 C 158.219 16.221 156.995 15.381 155.387 15.381 C 153.611 15.381 152.435 16.221 151.667 17.493 L 151.595 17.493 L 151.595 15.741 L 147.851 15.741 Z" fill="rgb(255, 255, 255)"></path><path d="M 25.093 1.054 L 21.16 0 L 17.845 12.37 L 14.853 1.202 L 10.92 2.257 L 14.153 14.323 L 6.1 6.269 L 3.221 9.149 L 12.054 17.981 L 1.054 15.034 L 0 18.967 L 12.019 22.187 C 11.261 18.919 12.584 15.52 15.353 13.625 C 18.122 11.73 21.77 11.728 24.542 13.619 C 27.313 15.509 28.642 18.907 27.888 22.176 L 38.81 25.102 L 39.863 21.169 L 27.797 17.936 L 38.797 14.989 L 37.744 11.056 L 25.678 14.289 L 33.73 6.236 L 30.851 3.356 L 22.141 12.067 L 25.091 1.054 Z" fill="rgb(255, 255, 255)"></path><path d="M 27.877 22.221 C 27.545 23.623 26.845 24.911 25.851 25.954 L 33.764 33.867 L 36.644 30.987 Z" fill="rgb(255, 255, 255)"></path><path d="M 25.771 26.037 C 24.769 27.062 23.513 27.804 22.132 28.188 L 25.012 38.934 L 28.945 37.88 L 25.77 26.037 Z" fill="rgb(255, 255, 255)"></path><path d="M 21.986 28.227 C 21.321 28.398 20.638 28.484 19.952 28.483 C 19.218 28.484 18.488 28.385 17.78 28.19 L 14.898 38.947 L 18.831 40.001 L 21.986 28.228 Z" fill="rgb(255, 255, 255)"></path><path d="M 17.641 28.151 C 16.279 27.747 15.047 26.994 14.066 25.967 L 6.133 33.9 L 9.013 36.78 L 17.641 28.15 Z" fill="rgb(255, 255, 255)"></path><path d="M 14 25.897 C 13.031 24.862 12.35 23.591 12.025 22.211 L 1.066 25.147 L 2.12 29.08 Z" fill="rgb(255, 255, 255)"></path></g></svg>,
@@ -33,15 +32,12 @@ const LogoCarousel = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setIsVisible(true);
-          } else {
-            // Reset animation when out of view so it can retrigger
-            setIsVisible(false);
           }
         });
       },
       {
-        threshold: 0.1, // Trigger when 10% of component is visible
-        rootMargin: '50px 0px -50px 0px' // Add some margin for better UX
+        threshold: 0.1,
+        rootMargin: '50px 0px -50px 0px'
       }
     );
 
@@ -56,216 +52,113 @@ const LogoCarousel = () => {
     };
   }, []);
 
-  // Calculate total number of logos and how many to display
-  const totalLogos = logos.length;
-  const visibleOnMd = 3; // 3 logos on medium screens
-  const visibleOnSm = 2; // 2 logos on small screens
-
-  // Handle navigation
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => 
-      (prevIndex + 1) % (totalLogos - (window.innerWidth >= 768 ? visibleOnMd : visibleOnSm) + 1)
-    );
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0
-        ? totalLogos - (window.innerWidth >= 768 ? visibleOnMd : visibleOnSm)
-        : prevIndex - 1
-    );
-  };
-
   return (
-      <div 
-        ref={containerRef}
-        className="relative w-full py-10"
+    <div 
+      ref={containerRef}
+      className="relative w-full lg:w-[70%] mx-auto py-10 overflow-hidden bg-transparent"
+    >
+      {/* Title with fade-in animation */}
+      <p 
+        className={`text-white text-sm text-center py-10 transition-all duration-500 ease-out ${
+          isVisible 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-4'
+        }`}
       >
-        {/* Title with fade-in animation */}
-        <p 
-          className={`text-white text-sm text-center py-10 transition-all duration-500 ease-out ${
-            isVisible 
-              ? 'opacity-100 translate-y-0' 
-              : 'opacity-0 translate-y-4'
-          }`}
-        >
-          Trusted by 2million + teams
-        </p>
+        Trusted by 2 million+ teams
+      </p>
 
-        {/* Large screens - show all logos */}
-        <div className="hidden lg:flex justify-between items-center w-[80%] mx-auto">
+      {/* Infinite scrolling container */}
+      <div className="relative w-full">
+        <div 
+          className={`flex gap-16 ${isVisible ? 'animate-scroll' : ''}`}
+          style={{
+            width: 'fit-content'
+          }}
+        >
+          {/* First set of logos */}
           {logos.map((logo, index) => (
             <div 
-              key={`lg-logo-${index}`} 
-              className={`flex items-center justify-center transition-all duration-300 ease-out ${
-                isVisible 
-                  ? 'opacity-100 translate-y-0 scale-100' 
-                  : 'opacity-0 translate-y-8 scale-95'
-              }`}
-              style={{ 
-                transitionDelay: isVisible ? `${index * 100}ms` : '0ms' 
-              }}
+              key={`logo-1-${index}`}
+              className="flex items-center justify-center min-w-[150px] h-[60px] grayscale hover:grayscale-0 transition-all duration-300"
             >
               {logo}
+              {/* <img 
+                src={logo} 
+                // alt={logo.name}
+                className="max-w-[150px] max-h-[50px] object-contain filter brightness-0 invert"
+              /> */}
+            </div>
+          ))}
+          
+          {/* Duplicate set for seamless loop */}
+          {logos.map((logo, index) => (
+            <div 
+              key={`logo-2-${index}`}
+              className="flex items-center justify-center min-w-[150px] h-[60px] grayscale hover:grayscale-0 transition-all duration-300"
+            >
+              {logo}
+              {/* <img 
+                src={logo.url} 
+                alt={logo.name}
+                className="max-w-[150px] max-h-[50px] object-contain filter brightness-0 invert"
+              /> */}
+            </div>
+          ))}
+
+          {/* Third set for extra smooth scrolling */}
+          {logos.map((logo, index) => (
+            <div 
+              key={`logo-3-${index}`}
+              className="flex items-center justify-center min-w-[150px] h-[60px] grayscale hover:grayscale-0 transition-all duration-300"
+            >
+              {logo}
+              {/* <img 
+                src={logo.url} 
+                alt={logo.name}
+                className="max-w-[150px] max-h-[50px] object-contain filter brightness-0 invert"
+              /> */}
             </div>
           ))}
         </div>
 
-        {/* Medium screens - show 3 logos with navigation */}
-        <div className="hidden md:block lg:hidden w-[90%] mx-auto">
-          <div className="flex justify-between items-center">
-            {/* Navigation - Previous */}
-            <button 
-              onClick={handlePrev}
-              className={`p-2 rounded-full text-white transition-all duration-300 ease-out hover:bg-white/10 ${
-                isVisible 
-                  ? 'opacity-100 translate-x-0' 
-                  : 'opacity-0 -translate-x-4'
-              }`}
-              style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
-            >
-              <CgArrowLongLeft /> 
-            </button>
-
-            {/* Logos container */}
-            <div className="flex justify-between items-center space-x-8 w-[80%]">
-              {logos.slice(currentIndex, currentIndex + visibleOnMd).map((logo, index) => (
-                <div 
-                  key={`md-logo-${currentIndex}-${index}`} 
-                  className={`flex items-center justify-center transition-all duration-300 ease-out ${
-                    isVisible 
-                      ? 'opacity-100 translate-y-0 scale-100' 
-                      : 'opacity-0 translate-y-8 scale-95'
-                  }`}
-                  style={{ 
-                    transitionDelay: isVisible ? `${(index + 1) * 150}ms` : '0ms' 
-                  }}
-                >
-                  {logo}
-                </div>
-              ))}
-            </div>
-
-            {/* Navigation - Next */}
-            <button 
-              onClick={handleNext}
-              className={`p-2 rounded-full text-white transition-all duration-300 ease-out hover:bg-white/10 ${
-                isVisible 
-                  ? 'opacity-100 translate-x-0' 
-                  : 'opacity-0 translate-x-4'
-              }`}
-              style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
-            >
-              <CgArrowLongRight /> 
-            </button>
-          </div>
-        </div>
-
-        {/* Small screens - show 2 logos with navigation */}
-        <div className="md:hidden w-full mx-auto">
-          <div className="flex justify-between items-center">
-            {/* Navigation - Previous */}
-            <button 
-              onClick={handlePrev}
-              className={`p-2 rounded-full text-white transition-all duration-300 ease-out hover:bg-white/10 ${
-                isVisible 
-                  ? 'opacity-100 translate-x-0' 
-                  : 'opacity-0 -translate-x-4'
-              }`}
-              style={{ transitionDelay: isVisible ? '150ms' : '0ms' }}
-            >
-              <CgArrowLongLeft /> 
-            </button>
-
-            {/* Logos container */}
-            <div className="flex justify-between items-center w-[70%] overflow-hidden">
-              {logos.slice(currentIndex, currentIndex + visibleOnSm).map((logo, index) => (
-                <div
-                  key={`sm-logo-${currentIndex}-${index}`}
-                  className={`flex items-center justify-center transform scale-50 transition-all duration-300 ease-out ${
-                    isVisible 
-                      ? 'opacity-100 translate-y-0 rotate-0' 
-                      : 'opacity-0 translate-y-6 rotate-12'
-                  }`}
-                  style={{ 
-                    transitionDelay: isVisible ? `${(index + 1) * 100}ms` : '0ms' 
-                  }}
-                >
-                  {logo}
-                </div>
-              ))}
-            </div>
-
-            {/* Navigation - Next */}
-            <button 
-              onClick={handleNext}
-              className={`p-2 rounded-full text-white transition-all duration-300 ease-out hover:bg-white/10 ${
-                isVisible 
-                  ? 'opacity-100 translate-x-0' 
-                  : 'opacity-0 translate-x-4'
-              }`}
-              style={{ transitionDelay: isVisible ? '150ms' : '0ms' }}
-            >
-              <CgArrowLongRight /> 
-            </button>
-          </div>
-        </div>
-
-        {/* Pagination dots for mobile */}
-        <div className="flex justify-center mt-6 space-x-2 md:hidden">
-          {Array.from({ length: totalLogos - visibleOnSm + 1 }).map((_, index) => (
-            <button
-              key={`dot-${index}`}
-              onClick={() => setCurrentIndex(index)}
-              className={`h-2 w-2 rounded-full transition-all duration-200 ease-out ${
-                currentIndex === index ? 'bg-white scale-125' : 'bg-gray-600 hover:bg-gray-400'
-              } ${
-                isVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-2'
-              }`}
-              style={{ 
-                transitionDelay: isVisible ? `${400 + (index * 50)}ms` : '0ms' 
-              }}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Pagination dots for medium screens */}
-        <div className="hidden md:flex lg:hidden justify-center mt-6 space-x-2">
-          {Array.from({ length: totalLogos - visibleOnMd + 1 }).map((_, index) => (
-            <button
-              key={`dot-md-${index}`}
-              onClick={() => setCurrentIndex(index)}
-              className={`h-2 w-2 rounded-full transition-all duration-200 ease-out ${
-                currentIndex === index ? 'bg-white scale-125' : 'bg-gray-600 hover:bg-gray-400'
-              } ${
-                isVisible 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-2'
-              }`}
-              style={{ 
-                transitionDelay: isVisible ? `${500 + (index * 50)}ms` : '0ms' 
-              }}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
+        {/* Gradient overlays for fade effect */}
+        {/* <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-black/70 to-transparent pointer-events-none z-10"></div>
+        <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-black/70 to-transparent pointer-events-none z-10"></div> */}
       </div>
+
+      <style>{`
+        @keyframes scroll {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(calc(-100% / 3));
+          }
+        }
+
+        .animate-scroll {
+          animation: scroll 30s linear infinite;
+        }
+
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+    </div>
   );
 };
 
 export default LogoCarousel;
 
-
-// import{ useState } from 'react';
+// import { useState, useEffect, useRef } from 'react';
 // import { CgArrowLongLeft, CgArrowLongRight } from "react-icons/cg";
 
 // const LogoCarousel = () => {
 //   const [currentIndex, setCurrentIndex] = useState(0);
+//   const [isVisible, setIsVisible] = useState(false);
+//   const containerRef = useRef(null);
   
-//   // All SVG logos stored in an array for easier management
 //   const logos = [
 //     // Logo 1
 //     <svg key="logo1" xmlns="http://www.w3.org/2000/svg" width="169" height="41" fill="none"><g transform="translate(0.79 0.923)"><path d="M 48.96 28.03 L 60.912 28.03 L 60.912 24.43 L 53.208 24.43 L 53.208 10.87 L 48.96 10.87 Z" fill="rgb(255, 255, 255)"></path><path d="M 67.994 25.629 C 66.29 25.629 65.402 24.141 65.402 21.909 C 65.402 19.677 66.29 18.165 67.994 18.165 C 69.698 18.165 70.61 19.677 70.61 21.909 C 70.61 24.141 69.698 25.629 67.994 25.629 Z M 68.018 28.413 C 71.978 28.413 74.57 25.605 74.57 21.909 C 74.57 18.213 71.978 15.405 68.018 15.405 C 64.082 15.405 61.442 18.213 61.442 21.909 C 61.442 25.605 64.082 28.413 68.018 28.413 Z" fill="rgb(255, 255, 255)"></path><path d="M 81.424 32.277 C 83.248 32.277 84.856 31.869 85.936 30.909 C 86.92 30.021 87.568 28.677 87.568 26.829 L 87.568 15.741 L 83.824 15.741 L 83.824 17.061 L 83.776 17.061 C 83.056 16.029 81.952 15.381 80.32 15.381 C 77.272 15.381 75.16 17.925 75.16 21.525 C 75.16 25.293 77.728 27.357 80.488 27.357 C 81.976 27.357 82.912 26.757 83.632 25.941 L 83.728 25.941 L 83.728 27.165 C 83.728 28.653 83.032 29.517 81.376 29.517 C 80.08 29.517 79.432 28.965 79.216 28.317 L 75.424 28.317 C 75.808 30.885 78.04 32.277 81.424 32.277 Z M 81.4 24.453 C 79.936 24.453 78.976 23.253 78.976 21.405 C 78.976 19.533 79.936 18.333 81.4 18.333 C 83.032 18.333 83.896 19.725 83.896 21.381 C 83.896 23.109 83.104 24.453 81.4 24.453 Z" fill="rgb(255, 255, 255)"></path><path d="M 95.266 25.629 C 93.562 25.629 92.674 24.141 92.674 21.909 C 92.674 19.677 93.562 18.165 95.266 18.165 C 96.97 18.165 97.882 19.677 97.882 21.909 C 97.882 24.141 96.97 25.629 95.266 25.629 Z M 95.29 28.413 C 99.25 28.413 101.842 25.605 101.842 21.909 C 101.842 18.213 99.25 15.405 95.29 15.405 C 91.354 15.405 88.714 18.213 88.714 21.909 C 88.714 25.605 91.354 28.413 95.29 28.413 Z" fill="rgb(255, 255, 255)"></path><path d="M 102.985 28.03 L 106.897 28.03 L 106.897 15.742 L 102.985 15.742 Z M 102.985 14.038 L 106.897 14.038 L 106.897 10.87 L 102.985 10.87 Z" fill="rgb(255, 255, 255)"></path><path d="M 108.594 32.085 L 112.506 32.085 L 112.506 26.757 L 112.554 26.757 C 113.322 27.789 114.45 28.413 116.034 28.413 C 119.25 28.413 121.386 25.869 121.386 21.885 C 121.386 18.189 119.394 15.381 116.13 15.381 C 114.45 15.381 113.25 16.125 112.41 17.229 L 112.338 17.229 L 112.338 15.741 L 108.594 15.741 Z M 115.026 25.389 C 113.346 25.389 112.386 24.021 112.386 22.029 C 112.386 20.037 113.25 18.525 114.954 18.525 C 116.634 18.525 117.426 19.917 117.426 22.029 C 117.426 24.117 116.514 25.389 115.026 25.389 Z" fill="rgb(255, 255, 255)"></path><path d="M 127.755 28.413 C 130.971 28.413 133.347 27.021 133.347 24.333 C 133.347 21.189 130.803 20.637 128.643 20.277 C 127.083 19.989 125.691 19.869 125.691 19.005 C 125.691 18.237 126.435 17.877 127.395 17.877 C 128.475 17.877 129.219 18.213 129.363 19.317 L 132.963 19.317 C 132.771 16.893 130.899 15.381 127.419 15.381 C 124.515 15.381 122.115 16.725 122.115 19.317 C 122.115 22.197 124.395 22.773 126.531 23.133 C 128.163 23.421 129.651 23.541 129.651 24.645 C 129.651 25.437 128.907 25.869 127.731 25.869 C 126.435 25.869 125.619 25.269 125.475 24.045 L 121.779 24.045 C 121.899 26.757 124.155 28.413 127.755 28.413 Z" fill="rgb(255, 255, 255)"></path><path d="M 138.661 28.389 C 140.365 28.389 141.445 27.717 142.333 26.517 L 142.405 26.517 L 142.405 28.029 L 146.149 28.029 L 146.149 15.741 L 142.237 15.741 L 142.237 22.605 C 142.237 24.069 141.421 25.077 140.077 25.077 C 138.829 25.077 138.229 24.333 138.229 22.989 L 138.229 15.741 L 134.341 15.741 L 134.341 23.805 C 134.341 26.541 135.829 28.389 138.661 28.389 Z" fill="rgb(255, 255, 255)"></path><path d="M 147.851 28.029 L 151.763 28.029 L 151.763 21.141 C 151.763 19.677 152.483 18.645 153.707 18.645 C 154.883 18.645 155.435 19.413 155.435 20.733 L 155.435 28.029 L 159.347 28.029 L 159.347 21.141 C 159.347 19.677 160.043 18.645 161.291 18.645 C 162.467 18.645 163.019 19.413 163.019 20.733 L 163.019 28.029 L 166.931 28.029 L 166.931 20.037 C 166.931 17.277 165.539 15.381 162.755 15.381 C 161.171 15.381 159.851 16.053 158.891 17.541 L 158.843 17.541 C 158.219 16.221 156.995 15.381 155.387 15.381 C 153.611 15.381 152.435 16.221 151.667 17.493 L 151.595 17.493 L 151.595 15.741 L 147.851 15.741 Z" fill="rgb(255, 255, 255)"></path><path d="M 25.093 1.054 L 21.16 0 L 17.845 12.37 L 14.853 1.202 L 10.92 2.257 L 14.153 14.323 L 6.1 6.269 L 3.221 9.149 L 12.054 17.981 L 1.054 15.034 L 0 18.967 L 12.019 22.187 C 11.261 18.919 12.584 15.52 15.353 13.625 C 18.122 11.73 21.77 11.728 24.542 13.619 C 27.313 15.509 28.642 18.907 27.888 22.176 L 38.81 25.102 L 39.863 21.169 L 27.797 17.936 L 38.797 14.989 L 37.744 11.056 L 25.678 14.289 L 33.73 6.236 L 30.851 3.356 L 22.141 12.067 L 25.091 1.054 Z" fill="rgb(255, 255, 255)"></path><path d="M 27.877 22.221 C 27.545 23.623 26.845 24.911 25.851 25.954 L 33.764 33.867 L 36.644 30.987 Z" fill="rgb(255, 255, 255)"></path><path d="M 25.771 26.037 C 24.769 27.062 23.513 27.804 22.132 28.188 L 25.012 38.934 L 28.945 37.88 L 25.77 26.037 Z" fill="rgb(255, 255, 255)"></path><path d="M 21.986 28.227 C 21.321 28.398 20.638 28.484 19.952 28.483 C 19.218 28.484 18.488 28.385 17.78 28.19 L 14.898 38.947 L 18.831 40.001 L 21.986 28.228 Z" fill="rgb(255, 255, 255)"></path><path d="M 17.641 28.151 C 16.279 27.747 15.047 26.994 14.066 25.967 L 6.133 33.9 L 9.013 36.78 L 17.641 28.15 Z" fill="rgb(255, 255, 255)"></path><path d="M 14 25.897 C 13.031 24.862 12.35 23.591 12.025 22.211 L 1.066 25.147 L 2.12 29.08 Z" fill="rgb(255, 255, 255)"></path></g></svg>,
@@ -286,9 +179,38 @@ export default LogoCarousel;
 //     <svg key="logo6" xmlns="http://www.w3.org/2000/svg" width="43" height="47" fill="none"><g transform="translate(0.423 0.423)"><path d="M 0 0 L 42.104 0 L 42.104 47 L 0 47 Z" fill="transparent"></path><path d="M 22.2 7.812 C 22.2 6.775 21.959 5.752 21.495 4.825 C 21.094 4.023 20.859 3.149 20.803 2.255 L 20.669 0.111 L 20.535 2.255 C 20.479 3.149 20.244 4.023 19.843 4.825 C 19.379 5.752 19.138 6.775 19.138 7.812 L 19.138 38.342 C 19.138 39.379 19.38 40.402 19.843 41.329 C 20.244 42.13 20.479 43.005 20.535 43.899 L 20.669 46.043 L 20.803 43.899 C 20.859 43.005 21.094 42.131 21.495 41.329 C 21.959 40.401 22.2 39.379 22.2 38.342 Z M 13.84 7.887 C 14.304 8.815 14.545 9.837 14.545 10.874 L 14.545 35.28 C 14.545 36.317 14.304 37.34 13.84 38.267 C 13.439 39.069 13.204 39.943 13.148 40.837 L 13.014 42.981 L 12.88 40.837 C 12.824 39.943 12.589 39.069 12.188 38.267 C 11.724 37.34 11.483 36.317 11.483 35.28 L 11.483 10.874 C 11.483 9.837 11.724 8.814 12.188 7.887 C 12.588 7.086 12.824 6.212 12.88 5.317 L 13.014 3.173 L 13.148 5.318 C 13.204 6.212 13.439 7.086 13.84 7.888 Z M 10.717 13.937 C 10.717 12.899 10.477 11.877 10.012 10.95 C 9.611 10.148 9.376 9.274 9.32 8.38 L 9.187 6.235 L 9.053 8.38 C 8.997 9.274 8.762 10.148 8.361 10.95 C 7.897 11.877 7.656 12.899 7.656 13.936 L 7.656 32.218 C 7.656 33.255 7.898 34.278 8.361 35.204 C 8.762 36.006 8.997 36.88 9.053 37.774 L 9.187 39.919 L 9.321 37.774 C 9.377 36.88 9.612 36.006 10.013 35.204 C 10.477 34.277 10.718 33.254 10.718 32.218 L 10.718 13.936 Z M 6.185 17.074 C 6.648 18.001 6.89 19.024 6.89 20.06 L 6.89 26.094 C 6.89 27.131 6.648 28.153 6.185 29.08 C 5.784 29.882 5.549 30.756 5.493 31.65 L 5.359 33.795 L 5.225 31.65 C 5.169 30.756 4.934 29.882 4.533 29.08 C 4.069 28.153 3.828 27.131 3.828 26.094 L 3.828 20.06 C 3.828 19.024 4.069 18.001 4.533 17.074 C 4.933 16.272 5.169 15.398 5.225 14.504 L 5.359 12.36 L 5.493 14.504 C 5.549 15.398 5.783 16.272 6.185 17.074 Z M 3.062 23.077 L 3.062 23.123 L 3.062 23.032 Z M 0 23.123 L 0 23.077 C 0.007 24.098 0.248 25.104 0.705 26.018 C 1.105 26.82 1.341 27.694 1.397 28.588 L 1.531 30.732 L 1.665 28.588 C 1.721 27.694 1.956 26.82 2.357 26.018 C 2.814 25.105 3.055 24.098 3.062 23.078 C 3.055 22.056 2.814 21.05 2.357 20.136 C 1.956 19.334 1.721 18.46 1.665 17.566 L 1.531 15.422 L 1.397 17.566 C 1.341 18.46 1.106 19.334 0.705 20.136 C 0.248 21.05 0.007 22.056 0 23.077 L 0 23.032 L 0 23.122 Z M 17.668 4.825 C 18.131 5.753 18.373 6.775 18.373 7.812 L 18.373 38.342 C 18.373 39.379 18.131 40.402 17.668 41.329 C 17.267 42.131 17.032 43.005 16.976 43.899 L 16.842 46.043 L 16.708 43.899 C 16.652 43.005 16.417 42.131 16.016 41.329 C 15.552 40.402 15.311 39.379 15.311 38.342 L 15.311 7.812 C 15.311 6.775 15.551 5.752 16.016 4.825 C 16.417 4.023 16.652 3.149 16.708 2.255 L 16.842 0.111 L 16.976 2.255 C 17.032 3.15 17.266 4.024 17.668 4.825 Z M 25.323 4.825 C 25.787 5.753 26.028 6.775 26.028 7.812 L 26.028 38.342 C 26.028 39.379 25.787 40.402 25.323 41.329 C 24.922 42.131 24.687 43.005 24.631 43.899 L 24.497 46.043 L 24.363 43.899 C 24.307 43.005 24.072 42.131 23.671 41.329 C 23.207 40.402 22.966 39.379 22.966 38.342 L 22.966 7.812 C 22.966 6.775 23.207 5.752 23.671 4.825 C 24.072 4.023 24.307 3.149 24.363 2.255 L 24.497 0.111 L 24.631 2.255 C 24.687 3.149 24.922 4.024 25.323 4.825 Z M 29.856 10.875 C 29.856 9.837 29.614 8.815 29.151 7.887 C 28.75 7.085 28.515 6.211 28.459 5.317 L 28.325 3.173 L 28.191 5.318 C 28.135 6.212 27.9 7.086 27.499 7.888 C 27.035 8.815 26.793 9.837 26.793 10.874 L 26.793 35.28 C 26.793 36.317 27.035 37.34 27.499 38.267 C 27.899 39.068 28.135 39.942 28.191 40.837 L 28.325 42.981 L 28.459 40.837 C 28.515 39.943 28.75 39.069 29.151 38.267 C 29.614 37.339 29.856 36.317 29.856 35.28 L 29.856 10.874 Z M 32.978 10.95 C 33.442 11.877 33.683 12.9 33.683 13.936 L 33.683 32.218 C 33.683 33.255 33.442 34.278 32.978 35.204 C 32.577 36.006 32.342 36.88 32.286 37.774 L 32.152 39.919 L 32.018 37.774 C 31.962 36.88 31.727 36.006 31.326 35.204 C 30.862 34.277 30.621 33.255 30.621 32.218 L 30.621 13.936 C 30.621 12.899 30.863 11.876 31.326 10.95 C 31.727 10.148 31.962 9.274 32.018 8.38 L 32.152 6.235 L 32.286 8.38 C 32.342 9.274 32.577 10.148 32.978 10.95 Z M 37.511 20.06 C 37.511 19.023 37.27 18.001 36.806 17.074 C 36.405 16.272 36.17 15.398 36.114 14.504 L 35.98 12.36 L 35.846 14.504 C 35.79 15.398 35.555 16.272 35.154 17.074 C 34.69 18.001 34.449 19.023 34.449 20.06 L 34.449 26.094 C 34.449 27.131 34.69 28.153 35.154 29.08 C 35.554 29.882 35.79 30.756 35.846 31.65 L 35.98 33.795 L 36.114 31.65 C 36.17 30.756 36.405 29.882 36.806 29.08 C 37.27 28.153 37.511 27.13 37.511 26.094 Z M 41.338 23.077 L 41.338 23.123 L 41.338 23.032 Z M 38.277 23.077 C 38.284 24.098 38.524 25.104 38.981 26.018 C 39.382 26.82 39.618 27.694 39.674 28.588 L 39.807 30.732 L 39.942 28.588 C 39.998 27.694 40.233 26.82 40.634 26.018 C 41.09 25.105 41.331 24.098 41.338 23.078 C 41.331 22.056 41.091 21.05 40.634 20.136 C 40.233 19.334 39.997 18.46 39.941 17.566 L 39.808 15.422 L 39.674 17.566 C 39.618 18.46 39.382 19.334 38.981 20.136 C 38.524 21.05 38.284 22.056 38.277 23.077 Z M 38.277 23.077 L 38.277 23.032 L 38.277 23.122 Z" fill="rgb(255, 255, 255)"></path></g></svg>
 //   ];
 
+//   // Intersection Observer for scroll detection
+//   useEffect(() => {
+//     const observer = new IntersectionObserver(
+//       (entries) => {
+//         entries.forEach((entry) => {
+//           if (entry.isIntersecting) {
+//             setIsVisible(true);
+//           } else {
+//             // Reset animation when out of view so it can retrigger
+//             setIsVisible(false);
+//           }
+//         });
+//       },
+//       {
+//         threshold: 0.1, // Trigger when 10% of component is visible
+//         rootMargin: '50px 0px -50px 0px' // Add some margin for better UX
+//       }
+//     );
+
+//     if (containerRef.current) {
+//       observer.observe(containerRef.current);
+//     }
+
+//     return () => {
+//       if (containerRef.current) {
+//         observer.unobserve(containerRef.current);
+//       }
+//     };
+//   }, []);
+
 //   // Calculate total number of logos and how many to display
 //   const totalLogos = logos.length;
-//   // const visibleOnLg = totalLogos; // All logos on large screens
 //   const visibleOnMd = 3; // 3 logos on medium screens
 //   const visibleOnSm = 2; // 2 logos on small screens
 
@@ -308,104 +230,184 @@ export default LogoCarousel;
 //   };
 
 //   return (
-//     <div className="relative w-full py-10">
-//       <p className='text-white text-sm text-center py-10'>Trusted by 2million + teams </p>
-//       {/* Large screens - show all logos */}
-//       <div className="hidden lg:flex justify-between items-center w-[80%] mx-auto">
-//         {logos.map((logo, index) => (
-//           <div key={`lg-logo-${index}`} className="flex items-center justify-center">
-//             {logo}
+//       <div 
+//         ref={containerRef}
+//         className="relative w-full py-10"
+//       >
+//         {/* Title with fade-in animation */}
+//         <p 
+//           className={`text-white text-sm text-center py-10 transition-all duration-500 ease-out ${
+//             isVisible 
+//               ? 'opacity-100 translate-y-0' 
+//               : 'opacity-0 translate-y-4'
+//           }`}
+//         >
+//           Trusted by 2million + teams
+//         </p>
+
+//         {/* Large screens - show all logos */}
+//         <div className="hidden lg:flex justify-between items-center w-[80%] mx-auto">
+//           {logos.map((logo, index) => (
+//             <div 
+//               key={`lg-logo-${index}`} 
+//               className={`flex items-center justify-center transition-all duration-300 ease-out ${
+//                 isVisible 
+//                   ? 'opacity-100 translate-y-0 scale-100' 
+//                   : 'opacity-0 translate-y-8 scale-95'
+//               }`}
+//               style={{ 
+//                 transitionDelay: isVisible ? `${index * 100}ms` : '0ms' 
+//               }}
+//             >
+//               {logo}
+//             </div>
+//           ))}
+//         </div>
+
+//         {/* Medium screens - show 3 logos with navigation */}
+//         <div className="hidden md:block lg:hidden w-[90%] mx-auto">
+//           <div className="flex justify-between items-center">
+//             {/* Navigation - Previous */}
+//             <button 
+//               onClick={handlePrev}
+//               className={`p-2 rounded-full text-white transition-all duration-300 ease-out hover:bg-white/10 ${
+//                 isVisible 
+//                   ? 'opacity-100 translate-x-0' 
+//                   : 'opacity-0 -translate-x-4'
+//               }`}
+//               style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
+//             >
+//               <CgArrowLongLeft /> 
+//             </button>
+
+//             {/* Logos container */}
+//             <div className="flex justify-between items-center space-x-8 w-[80%]">
+//               {logos.slice(currentIndex, currentIndex + visibleOnMd).map((logo, index) => (
+//                 <div 
+//                   key={`md-logo-${currentIndex}-${index}`} 
+//                   className={`flex items-center justify-center transition-all duration-300 ease-out ${
+//                     isVisible 
+//                       ? 'opacity-100 translate-y-0 scale-100' 
+//                       : 'opacity-0 translate-y-8 scale-95'
+//                   }`}
+//                   style={{ 
+//                     transitionDelay: isVisible ? `${(index + 1) * 150}ms` : '0ms' 
+//                   }}
+//                 >
+//                   {logo}
+//                 </div>
+//               ))}
+//             </div>
+
+//             {/* Navigation - Next */}
+//             <button 
+//               onClick={handleNext}
+//               className={`p-2 rounded-full text-white transition-all duration-300 ease-out hover:bg-white/10 ${
+//                 isVisible 
+//                   ? 'opacity-100 translate-x-0' 
+//                   : 'opacity-0 translate-x-4'
+//               }`}
+//               style={{ transitionDelay: isVisible ? '200ms' : '0ms' }}
+//             >
+//               <CgArrowLongRight /> 
+//             </button>
 //           </div>
-//         ))}
-//       </div>
+//         </div>
 
-//       {/* Medium screens - show 3 logos with navigation */}
-//       <div className="hidden md:block lg:hidden w-[90%] mx-auto">
-//         <div className="flex justify-between items-center">
-//           {/* Navigation - Previous */}
-//           <button 
-//             onClick={handlePrev}
-//             className="p-2 rounded-full text-white transition-colors z-50"
-//           >
-//             <CgArrowLongLeft /> 
-//           </button>
+//         {/* Small screens - show 2 logos with navigation */}
+//         <div className="md:hidden w-full mx-auto">
+//           <div className="flex justify-between items-center">
+//             {/* Navigation - Previous */}
+//             <button 
+//               onClick={handlePrev}
+//               className={`p-2 rounded-full text-white transition-all duration-300 ease-out hover:bg-white/10 ${
+//                 isVisible 
+//                   ? 'opacity-100 translate-x-0' 
+//                   : 'opacity-0 -translate-x-4'
+//               }`}
+//               style={{ transitionDelay: isVisible ? '150ms' : '0ms' }}
+//             >
+//               <CgArrowLongLeft /> 
+//             </button>
 
-//           {/* Logos container */}
-//           <div className="flex justify-between items-center space-x-8 w-[80%]">
-//             {logos.slice(currentIndex, currentIndex + visibleOnMd).map((logo, index) => (
-//               <div key={`md-logo-${index}`} className="flex items-center justify-center">
-//                 {logo}
-//               </div>
-//             ))}
+//             {/* Logos container */}
+//             <div className="flex justify-between items-center w-[70%] overflow-hidden">
+//               {logos.slice(currentIndex, currentIndex + visibleOnSm).map((logo, index) => (
+//                 <div
+//                   key={`sm-logo-${currentIndex}-${index}`}
+//                   className={`flex items-center justify-center transform scale-50 transition-all duration-300 ease-out ${
+//                     isVisible 
+//                       ? 'opacity-100 translate-y-0 rotate-0' 
+//                       : 'opacity-0 translate-y-6 rotate-12'
+//                   }`}
+//                   style={{ 
+//                     transitionDelay: isVisible ? `${(index + 1) * 100}ms` : '0ms' 
+//                   }}
+//                 >
+//                   {logo}
+//                 </div>
+//               ))}
+//             </div>
+
+//             {/* Navigation - Next */}
+//             <button 
+//               onClick={handleNext}
+//               className={`p-2 rounded-full text-white transition-all duration-300 ease-out hover:bg-white/10 ${
+//                 isVisible 
+//                   ? 'opacity-100 translate-x-0' 
+//                   : 'opacity-0 translate-x-4'
+//               }`}
+//               style={{ transitionDelay: isVisible ? '150ms' : '0ms' }}
+//             >
+//               <CgArrowLongRight /> 
+//             </button>
 //           </div>
+//         </div>
 
-//           {/* Navigation - Next */}
-//           <button 
-//             onClick={handleNext}
-//             className="p-2 rounded-full text-white transition-colors z-50"
-//           >
-//             <CgArrowLongRight /> 
-//           </button>
+//         {/* Pagination dots for mobile */}
+//         <div className="flex justify-center mt-6 space-x-2 md:hidden">
+//           {Array.from({ length: totalLogos - visibleOnSm + 1 }).map((_, index) => (
+//             <button
+//               key={`dot-${index}`}
+//               onClick={() => setCurrentIndex(index)}
+//               className={`h-2 w-2 rounded-full transition-all duration-200 ease-out ${
+//                 currentIndex === index ? 'bg-white scale-125' : 'bg-gray-600 hover:bg-gray-400'
+//               } ${
+//                 isVisible 
+//                   ? 'opacity-100 translate-y-0' 
+//                   : 'opacity-0 translate-y-2'
+//               }`}
+//               style={{ 
+//                 transitionDelay: isVisible ? `${400 + (index * 50)}ms` : '0ms' 
+//               }}
+//               aria-label={`Go to slide ${index + 1}`}
+//             />
+//           ))}
+//         </div>
+
+//         {/* Pagination dots for medium screens */}
+//         <div className="hidden md:flex lg:hidden justify-center mt-6 space-x-2">
+//           {Array.from({ length: totalLogos - visibleOnMd + 1 }).map((_, index) => (
+//             <button
+//               key={`dot-md-${index}`}
+//               onClick={() => setCurrentIndex(index)}
+//               className={`h-2 w-2 rounded-full transition-all duration-200 ease-out ${
+//                 currentIndex === index ? 'bg-white scale-125' : 'bg-gray-600 hover:bg-gray-400'
+//               } ${
+//                 isVisible 
+//                   ? 'opacity-100 translate-y-0' 
+//                   : 'opacity-0 translate-y-2'
+//               }`}
+//               style={{ 
+//                 transitionDelay: isVisible ? `${500 + (index * 50)}ms` : '0ms' 
+//               }}
+//               aria-label={`Go to slide ${index + 1}`}
+//             />
+//           ))}
 //         </div>
 //       </div>
-
-//       {/* Small screens - show 2 logos with navigation */}
-//       <div className="md:hidden w-full mx-auto">
-//         <div className="flex justify-between items-center">
-//           {/* Navigation - Previous */}
-//           <button 
-//             onClick={handlePrev}
-//             className="p-2 rounded-full text-white transition-colors z-50"
-//           >
-//             <CgArrowLongLeft /> 
-//           </button>
-
-//           {/* Logos container */}
-//      <div className="flex justify-between items-center w-[70%] overflow-hidden">
-//   {logos.slice(currentIndex, currentIndex + visibleOnSm).map((logo, index) => (
-//     <div
-//       key={`sm-logo-${index}`}
-//       className="flex items-center justify-center transform scale-50 "
-//     >
-//       {logo}
-//     </div>
-//   ))}
-// </div>
-
-
-//           {/* Navigation - Next */}
-//           <button 
-//             onClick={handleNext}
-//             className="p-2 rounded-full text-white transition-colors z-50"
-//           >
-//             <CgArrowLongRight /> 
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Pagination dots for mobile and tablet */}
-//       <div className="flex justify-center mt-6 space-x-2 md:hidden">
-//         {Array.from({ length: totalLogos - visibleOnSm + 1 }).map((_, index) => (
-//           <button
-//             key={`dot-${index}`}
-//             onClick={() => setCurrentIndex(index)}
-//             className={`h-2 w-2 rounded-full ${currentIndex === index ? 'bg-white' : 'bg-gray-600'}`}
-//             aria-label={`Go to slide ${index + 1}`}
-//           />
-//         ))}
-//       </div>
-//       <div className="hidden md:flex lg:hidden justify-center mt-6 space-x-2">
-//         {Array.from({ length: totalLogos - visibleOnMd + 1 }).map((_, index) => (
-//           <button
-//             key={`dot-md-${index}`}
-//             onClick={() => setCurrentIndex(index)}
-//             className={`h-2 w-2 rounded-full ${currentIndex === index ? 'bg-white' : 'bg-gray-600'}`}
-//             aria-label={`Go to slide ${index + 1}`}
-//           />
-//         ))}
-//       </div>
-//     </div>
 //   );
 // };
 
 // export default LogoCarousel;
+
