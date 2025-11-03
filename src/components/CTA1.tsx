@@ -29,7 +29,7 @@ const CTA1 = () => {
   }, []);
 
   return (
-    <div className="py-24 md:py-32 w-[95%] lg:w-[80%] mx-auto">
+    <div className="py-24 md:py-32 w-[95%] lg:w-[80%] mx-auto ">
         <p 
         ref={textRef}
         className={`text-3xl md:text-5xl text-center relative ${isVisible ? 'animate-reveal' : 'text-gray-500'}`}

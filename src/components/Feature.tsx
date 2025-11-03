@@ -39,7 +39,7 @@ const Feature = () => {
   return (
     <div 
       ref={containerRef}
-      className="relative w-full h-[900px] md:h-[744px] lg:h-[780px] xl:h-[800px] bg-black overflow-hidden"
+      className="relative w-full  md:h-[744px] lg:h-[780px] xl:h-[800px] bg-black overflow-hidden"
     >
       {/* Top left purple gradient with animation */}
       <div 
