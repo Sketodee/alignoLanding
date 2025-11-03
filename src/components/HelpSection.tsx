@@ -50,28 +50,28 @@ const HelpSection: React.FC = () => {
   const faqItems: FAQItem[] = [
     {
       id: 1,
-      question: "What is EditLabs, and how does it help with project management?",
-      answer: "EditLabs is a comprehensive project management platform designed to streamline workflows and enhance team collaboration. It provides tools for task management, team coordination, and project tracking to help you deliver projects efficiently and on time."
+      question: "What is EditLabs, and how does it help with editing?",
+      answer: " EditLabs is a growing suite of 8+ professional plugins for Premiere Pro and After Effects, built to automate the parts of editing that slow you down. From AI-powered commands (Terminal) to instant transitions (FastFX) and built-in sound design (SoundLabs), EditLabs lets you focus on what matters most: creativity instead of technical steps."
     },
     {
       id: 2,
-      question: "Can EditLabs be customized for different teams and projects?",
-      answer: "Yes, EditLabs offers extensive customization options to fit your team's unique needs. You can create custom workflows, set up project templates, configure user permissions, and adapt the interface to match your team's working style and project requirements."
+      question: "Can EditLabs be customized for different styles or workflows?",
+      answer: " Absolutely. Each plugin is designed to adapt to your workflow, not force you into ours. Whether you’re cutting music videos, vlogs, ads, or cinematic edits, you can fine-tune every effect, save your favorite settings, and even export presets to share with collaborators. EditLabs grows and changes with how you edit."
     },
     {
       id: 3,
-      question: "Does EditLabs support real-time collaboration across multiple locations?",
-      answer: "Absolutely! EditLabs is built for global teams with real-time collaboration features including live updates, instant messaging, shared workspaces, and synchronized project views. Team members can work together seamlessly regardless of their geographic location."
+      question: "Does EditLabs support real-time collaboration or shared projects?",
+      answer: "While EditLabs doesn’t replace shared editing platforms, it’s fully compatible with team workflows in Premiere and After Effects. All plugin settings, assets, and presets are portable so your team can stay perfectly synced whether you’re working locally or remotely. Use shared folders, Dropbox, or Google Drive to keep project files linked, and EditLabs will automatically recognize your setups."
     },
     {
       id: 4,
-      question: "What features does EditLabs offer for managing sprints?",
-      answer: "EditLabs provides comprehensive sprint management tools including sprint planning, backlog management, burndown charts, velocity tracking, and daily standup support. You can easily create sprints, assign tasks, monitor progress, and conduct sprint retrospectives."
+      question: "What features does EditLabs offer for boosting productivity?",
+      answer: "Every tool inside EditLabs is designed to remove friction.You can: Apply effects with a single click or command. Access assets instantly with the Asset Manager. Automate slow motion, motion blur, and glow. Add transitions and sound design in seconds. Watch YouTube tutorials or references right inside your editing tab. It’s like upgrading your entire workflow with a creative assistant that never slows down."
     },
     {
       id: 5,
-      question: "How does EditLabs help with tracking project performance?",
-      answer: "EditLabs offers advanced analytics and reporting features to track project performance. You can monitor key metrics, generate progress reports, analyze team productivity, track budget and timeline adherence, and gain insights through customizable dashboards and charts."
+      question: "How does EditLabs evolve over time?",
+      answer: " Your subscription includes new plugins, updates, and feature drops every month all based on real editor feedback. That means your toolkit never gets stale. As editing trends evolve, EditLabs keeps your workflow current with tools built for where the industry is headed, not where it’s been."
     }
   ];
 
@@ -235,7 +235,8 @@ const HelpSection: React.FC = () => {
               transitionDelay: isVisible ? '600ms' : '0ms' 
             }}
           >
-            EditLabs offers ready-made solutions to get you going fast. Easily customize as your team's needs expand.
+            EditLabs gives editors modern, time-saving tools that turn repetitive work into one-click actions.
+ Here’s how it fits into your workflow, whether you’re editing solo or running a post-production pipeline.
           </p>
         </div>
 
@@ -294,7 +295,7 @@ const HelpSection: React.FC = () => {
               transitionDelay: ctaVisible ? '600ms' : '0ms' 
             }}
           >
-            Ready to manage your team like a{' '}
+            Ready to edit like a{' '}
             <span 
               className={`italic transition-all duration-500 ease-out ${
                 ctaVisible 
@@ -321,7 +322,20 @@ const HelpSection: React.FC = () => {
               transitionDelay: ctaVisible ? '1000ms' : '0ms' 
             }}
           >
-            EditLabs offers ready-made solutions to get you going fast. Easily customize as your team's needs expand.
+             EditLabs gives you the tools top creators use to move faster, work smarter, and make every cut hit harder.
+          </p>
+
+            <p 
+            className={`text-gray-400 text-lg mb-12 max-w-2xl mx-auto transition-all duration-500 ease-out ${
+              ctaVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-8'
+            }`}
+            style={{ 
+              transitionDelay: ctaVisible ? '1000ms' : '0ms' 
+            }}
+          >
+             Start your free trial today and see why 19,000+ editors have already upgraded their workflow with Tiny Tapes.
           </p>
 
           {/* CTA Button */}

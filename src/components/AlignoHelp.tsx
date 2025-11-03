@@ -79,7 +79,7 @@ const EditLabHelp = () => {
                             transitionDelay: isVisible ? '600ms' : '0ms' 
                         }}
                     >
-                        Discover the powerful features that make EditLabs the ultimate project management solution for modern teams.
+                        Discover how EditLabs transforms the way you edit  from your workflow to your final export. These tools don’t just save time; they elevate your entire creative process.
                     </p>
                 </div>
             </div>
@@ -140,7 +140,7 @@ const EditLabHelp = () => {
                                 >
                                     Effortless
                                 </span>{' '}
-                                Task Management
+                                Editing Flow
                             </p>
                             <p 
                                 className={`py-3 font-extralight text-base text-[#858381] transition-all duration-500 ease-out ${
@@ -152,7 +152,8 @@ const EditLabHelp = () => {
                                     transitionDelay: isVisible ? '1600ms' : '0ms' 
                                 }}
                             >
-                                Keep all your tasks organized and visible in one place. EditLabs helps you assign, track, and prioritize tasks easily, ensuring nothing falls through the crack
+                                Forget menu diving and effect stacking. EditLabs keeps your entire toolkit inside reach, transitions, automation, and assets all load instantly where you need them.
+                                No interruptions, no setup, just pure creative flow from start to finish
                             </p>
                         </div>
                     </div>
@@ -212,7 +213,7 @@ const EditLabHelp = () => {
                                 >
                                     Seamless
                                 </span>{' '}
-                                Team Collaboration
+                                Visual & Sound Integration
                             </p>
                             <p 
                                 className={`py-3 font-extralight text-base line-clamp-4 text-[#858381] transition-all duration-500 ease-out ${
@@ -224,7 +225,7 @@ const EditLabHelp = () => {
                                     transitionDelay: isVisible ? '1800ms' : '0ms' 
                                 }}
                             >
-                                Work together with your team in real time, no matter where they are. EditLabs's collaborative tools make it easy to communicate, share files, and keep everyone in sync
+                                With FastFX, SoundLabs, and Glow working together, every cut feels tighter and every moment hits harder. Visuals, motion, and audio all sync naturally, giving your edits that polished, professional edge without extra effort.
                             </p>
                         </div>
                     </div>
@@ -283,9 +284,10 @@ const EditLabHelp = () => {
                                     transitionDelay: isVisible ? '1800ms' : '0ms' 
                                 }}
                             >
-                                Comprehensive
+                                Creative Freedom
                             </span>{' '}
-                            Project Insights
+                            That Scales With You
+
                         </p>
                         <p 
                             className={`py-3 font-extralight text-base text-[#858381] transition-all duration-500 ease-out ${
@@ -297,7 +299,8 @@ const EditLabHelp = () => {
                                 transitionDelay: isVisible ? '2000ms' : '0ms' 
                             }}
                         >
-                            Stay on top of your projects with advanced analytics and reporting. EditLabs gives you the insights you need to make data-driven decisions and improve overall efficiency.
+                            As your projects grow, EditLabs grows with you. New plugins drop monthly, letting you explore new effects, looks, and workflows, all without rebuilding your system or relearning your tools.
+                            You just keep editing. We’ll handle the upgrades.
                         </p>
                     </div>
                 </div>

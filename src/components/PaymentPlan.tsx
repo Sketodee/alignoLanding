@@ -33,33 +33,33 @@ const Pricing: React.FC = () => {
       title: 'Single Plugin Plan',
       price: '$25',
       period: '/month',
-      description: 'Access to just one (let them pick)',
+      description: ' For editors who want to test the waters.Get access to one plugin of your choice, perfect if you just need FastFX, Terminal, or another specific tool in your workflow.',
       features: [
         'Access to one plugin of your choice',
         'Basic customer support',
-        'Regular updates for selected plugin',
-        'Community forum access',
+        'Regular plugin updates & improvements',
+        'Access to the EditLabs community',
         'Cancel anytime'
       ],
       buttonVariant: 'default',
-      subText: 'Perfect for focused needs'
+      subText: 'Ideal for creators with focused needs or a favorite go-to tool.'
     },
     {
       id: 'full',
       title: 'Full Access Plan',
       price: '$50',
       period: '/month',
-      description: 'Everything (8-10 Plug-Ins)',
+      description: ' Unlock the full EditLabs suite of all 7 plugins that automate, organize, and elevate your entire workflow in Premiere Pro & After Effects.Everything you need to edit faster, create better, and stay inspired.',
       features: [
-        'Access to all 8-10 plugins',
-        'Priority customer support',
-        'Early access to new plugins',
-        'Advanced analytics dashboard',
-        'Custom workflow templates',
-        'API access for integrations'
+        'Unlimited access to all 7 Plugins',
+        'Priority support & faster updates',
+        'Early access to new releases',
+        'Advanced creative tools & workflow templates',
+        'Exclusive beta plugins & private features',
+        'Cancel anytime'
       ],
       buttonVariant: 'primary',
-      subText: 'Most popular choice',
+      subText: 'The complete EditLabs experience  built for editors who want it all.',
       isPopular: true
     },
     {
@@ -67,17 +67,17 @@ const Pricing: React.FC = () => {
       title: 'Annual Full Access Plan',
       price: '$350',
       period: '/year',
-      description: 'Save 42%, includes bonus packs or tutorials',
+      description: ' Save 40% and get exclusive bonuses, extra sound packs, and premium tutorials. You’ll always have the latest tools automatically updated, all year long.',
       features: [
         'Everything in Full Access Plan',
-        'Save 42% compared to monthly',
+        'Save 40% compared to monthly',
         'Exclusive bonus plugin packs',
-        'Premium tutorial library',
+        'Premium tutorial & workflow library',
         'One-on-one onboarding session',
-        'Custom plugin development consultation'
+        'Early beta access & developer insights'
       ],
       buttonVariant: 'premium',
-      subText: 'Best value - Save $250/year'
+      subText: 'For serious creators who want to invest once, and create nonstop all year.'
     }
   ];
 

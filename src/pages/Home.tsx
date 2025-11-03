@@ -6,6 +6,7 @@ import EditLabHelp from '../components/AlignoHelp'
 import Testimonials from '../components/Testimonials'
 import HelpSection from '../components/HelpSection'
 import PaymentPlan from '../components/PaymentPlan'
+import WhyWeBuilt from '../components/WhyWeBuilt'
 
 const Home = () => {
   return (
@@ -26,6 +27,7 @@ const Home = () => {
       <section id="pricing">
         <PaymentPlan />
       </section>
+      <WhyWeBuilt />
       <HelpSection />
     </>
   )

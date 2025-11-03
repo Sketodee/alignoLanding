@@ -34,9 +34,11 @@ const CTA1 = () => {
         ref={textRef}
         className={`text-3xl md:text-5xl text-center relative ${isVisible ? 'animate-reveal' : 'text-gray-500'}`}
       >
-        Take the first step towards <span className="emoji">😇</span>{' '}
-        <span className="text-purple-400">stress-free</span> project management with{' '}
-        <span className="text-purple-400">EditLabs</span> <span className="emoji">👋</span> Simplify tasks, boost productivity
+        <span className="emoji">💻</span>{' '}
+        Instant installs <span className="emoji">🧩</span>{' '}
+        <span className="text-purple-400">Seamless integration </span> <span className="emoji">🚀</span>{' '} New plugin drops that keep your workflow 
+        evolving you'll never edit the same way  {' '}
+       
       </p>
 
       <style>{`

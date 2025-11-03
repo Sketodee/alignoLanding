@@ -85,8 +85,8 @@ const Feature = () => {
                   transitionDelay: isVisible ? '500ms' : '0ms' 
                 }}
               >
-                faster,
-              </span> smarter Project Management
+                Smarter,
+              </span> tools for every part of your edit
             </p>
           </div>
 
@@ -101,7 +101,7 @@ const Feature = () => {
               transitionDelay: isVisible ? '700ms' : '0ms' 
             }}
           >
-            Our intuitive platform provides everything you need to efficiently manage your projects, from real-time collaboration to detailed task tracking.
+            What if your timeline responded like an extension of your ideas? Edit Labs is more than a plugin suite, it’s an ever-expanding set of tools designed for you to control your creativity with rhythm.
           </p>
         </div>
 

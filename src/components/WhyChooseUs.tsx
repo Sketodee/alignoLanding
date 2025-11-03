@@ -130,15 +130,17 @@ const WhyChooseUs = () => {
 
                         {/* Content items with staggered animation */}
                         {[
-                            "Advanced task automation",
-                            "Real-time collaboration",
-                            "Intelligent analytics",
-                            "Seamless integrations",
-                            "24/7 expert support"
+                            "All-in-one creative suite",
+                            "One-click results",
+                            "Terminal AI Assistant",
+                            "Constant evolution",
+                            "Seamless integration",
+                            "Built by editors, for editors", 
+                            "Lifetime workflow boost"
                         ].map((text, index) => (
                             <p 
                                 key={index}
-                                className={`py-3 ${index < 4 ? 'border-b-[0.5px] border-purple-900' : ''} relative z-10 transition-all duration-400 ease-out ${
+                                className={`py-3 ${index < 6 ? 'border-b-[0.5px] border-purple-900' : ''} relative z-10 transition-all duration-400 ease-out ${
                                     isVisible 
                                         ? 'opacity-100 translate-x-0' 
                                         : 'opacity-0 translate-x-8'
@@ -197,15 +199,17 @@ const WhyChooseUs = () => {
 
                         {/* Content items with staggered animation */}
                         {[
-                            "Basic task management",
-                            "Limited collaboration",
-                            "Standard reporting",
-                            "Few integrations",
-                            "Business hours support"
+                            "Single-use packs",
+                            "Manual everything",
+                            "No updates",
+                            "Fragmented workflow",
+                            "Limited creativity", 
+                            "Not built for editors",
+                            "Wasted time"
                         ].map((text, index) => (
                             <p 
                                 key={index}
-                                className={`py-3 ${index < 4 ? 'border-b-[0.5px] border-purple-900' : ''} relative z-10 transition-all duration-400 ease-out ${
+                                className={`py-3 ${index < 6 ? 'border-b-[0.5px] border-purple-900' : ''} relative z-10 transition-all duration-400 ease-out ${
                                     isVisible 
                                         ? 'opacity-100 translate-x-0' 
                                         : 'opacity-0 -translate-x-8'
