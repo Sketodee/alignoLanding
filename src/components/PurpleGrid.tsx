@@ -1,8 +1,35 @@
+import { useState, useEffect, useRef } from 'react';
+import editlabScreenshot from '../assets/editlabScreenshot.png';
+
 const PurpleGridContainer = () => {
+    const [isAtTop, setIsAtTop] = useState(false);
+    const imageRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (imageRef.current) {
+                const rect = imageRef.current.getBoundingClientRect();
+                // Check if the top of the image is at or near the top of the viewport
+                if (rect.top <= 0 && rect.bottom > 0) {
+                    setIsAtTop(true);
+                } else {
+                    setIsAtTop(false);
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Check initial position
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
-        <div className="bg-transparent overflow-hidden">
+        <div className="bg-transparent overflow-visible relative">
             {/* Grid lines container */}
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 pointer-events-none z-0">
                 {/* Top horizontal lines */}
                 <div className="absolute top-[15%] left-[5%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-purple-600 to-transparent opacity-20 w-[90%] mx-auto"></div>
                 <div className="absolute top-[20%] left-[5%] right-[10%] h-[1px] bg-gradient-to-r from-transparent via-purple-600 to-transparent w-[90%] opacity-20 mx-auto"></div>
@@ -47,7 +74,7 @@ const PurpleGridContainer = () => {
             </div>
 
             {/* Content area */}
-            <div className="absolute inset-0 flex flex-col items-center" style={{ top: '16%', bottom: '45%' }}>
+            <div className="relative flex flex-col items-center pt-12 sm:pt-16 md:pt-20 lg:pt-24 pb-6 md:pb-8 px-4 z-10">
                 {/* Error message above the content area */}
                 {/* <div className="absolute -top-16 left-1/2 transform -translate-x-1/2">
                     <div className="bg-transparent text-center">
@@ -65,19 +92,40 @@ const PurpleGridContainer = () => {
                 </div> */}
 
                 {/* Main title */}
-                <h1 className="pt-10 text-4xl w-full md:w-[70%] md:text-6xl text-center font-medium mb-6 text-pink-200">Edit faster. Create more. Click less</h1>
+                <h1 className="pt-20 sm:pt-28 md:pt-18 lg:pt-20 text-3xl sm:text-4xl md:text-5xl lg:text-6xl w-full md:w-[80%] lg:w-[70%] text-center font-medium mb-3 md:mb-4 text-pink-200 leading-tight">
+                    Edit faster. Create more. Click less
+                </h1>
 
                 {/* Subtitle */}
                 {/* <p className="pt-10 text-purple-400 drop-shadow-[0_0_4px_rgba(192,132,252,0.8)] max-w-md text-center px-8 font-semibold text-xl">
                     Prioritize What Matters – Streamline Your Workflow and Focus on What Drives Success!
                 </p> */}
-                <p className="pt-10 text-purple-400 [text-shadow:0_0_8px_rgba(192,132,252,0.8)] transform-gpu max-w-md text-center px-8 font-light text-sm md:text-base">
+                <p className="pt-3 md:pt-4 text-purple-400 [text-shadow:0_0_8px_rgba(192,132,252,0.8)] transform-gpu max-w-xs sm:max-w-md text-center px-4 sm:px-8 font-light text-xs sm:text-sm md:text-base">
                     A growing toolbox of powerful Premiere Pro and After Effects plugins designed to cut your workflow in half and supercharge your creativity
                 </p>
+            </div>
 
-                   
-
-
+            {/* Animated Screenshot Image */}
+            <div
+                ref={imageRef}
+                className="relative pb-8 md:pb-12 lg:pb-16 px-4 md:px-6 lg:px-8 z-10"
+            >
+                <div
+                    className="w-full sm:w-[95%] md:w-[90%] lg:w-[80%] xl:w-[70%] mx-auto transition-all duration-700 ease-out"
+                    style={{
+                        transformOrigin: 'center center',
+                        transform: isAtTop
+                            ? 'perspective(1500px) rotateX(0deg) scale(1)'
+                            : 'perspective(1500px) rotateX(45deg) scale(0.85)',
+                        opacity: isAtTop ? 1 : 0.7
+                    }}
+                >
+                    <img
+                        src={editlabScreenshot}
+                        alt="EditLab Screenshot"
+                        className="object-contain w-full rounded-md md:rounded-lg shadow-xl md:shadow-2xl shadow-purple-900/50"
+                    />
+                </div>
             </div>
         </div>
     );
